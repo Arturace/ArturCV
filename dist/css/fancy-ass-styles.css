@@ -1,0 +1,136 @@
+:root {
+  --global-primary-color: #57FAFA;
+  --global-primary-dark-color: #11B2B2;
+  --global-primary-light-color: #A3FFFF;
+  --global-secondary-color: #FA9357;
+  --global-secondary-dark-color: #C28A69;
+  --global-secondary-light-color: #FFC5A3; }
+
+html, body {
+  height: 100%; }
+
+body {
+  margin: 0px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 40px 1fr;
+  grid-template-areas: "WelcomeMessage " "navigation" "specific";
+  transition: grid-template-rows 200ms;
+  background-color: var(--global-primary-dark-color); }
+  @media screen and (max-height: 548px) {
+    body {
+      grid-template-rows: 1fr 40px min-content; } }
+  @media screen and (max-height: 548px) {
+    body.content-shown {
+      grid-template-rows: min-content 40px 1fr; } }
+  body.content-shown #WelcomeMessage {
+    max-height: 0px; }
+
+page-loader {
+  position: relative;
+  display: flex;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border-color: red;
+  border-width: 3px; }
+  page-loader .triangle {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 25px 43.3px 25px;
+    border-color: transparent transparent #7b9bbd transparent;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: center; }
+    page-loader .triangle:nth-of-type(1) {
+      animation-delay: 0s;
+      transform: rotate(0deg) translate(100px) rotate(0deg); }
+    page-loader .triangle:nth-of-type(2) {
+      animation-delay: 0.2s;
+      transform: rotate(72deg) translate(100px) rotate(-72deg); }
+    page-loader .triangle:nth-of-type(3) {
+      animation-delay: 0.4s;
+      transform: rotate(144deg) translate(100px) rotate(-144deg); }
+    page-loader .triangle:nth-of-type(4) {
+      animation-delay: 0.6s;
+      transform: rotate(216deg) translate(100px) rotate(-216deg); }
+    page-loader .triangle:nth-of-type(5) {
+      animation-delay: 0.8s;
+      transform: rotate(288deg) translate(100px) rotate(-288deg); }
+
+@keyframes example {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+#WelcomeMessage {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.2fr 1fr;
+  grid-template-areas: "greetings " "message";
+  color: var(--global-primary-light-color);
+  background-color: var(--global-primary-dark-color);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  overflow: hidden;
+  transition: max-height 200ms;
+  max-height: 600px; }
+  #WelcomeMessage h2 {
+    padding: 0px;
+    margin: 0px;
+    grid-area: 'greetings';
+    transition: margin-top 250ms ease-in-out;
+    margin-top: 20px; }
+    @media screen and (max-height: 548px) {
+      #WelcomeMessage h2 {
+        margin-top: 0px; } }
+  #WelcomeMessage div {
+    grid-area: message;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    justify-content: flex-end;
+    transition: padding 250ms ease-in-out;
+    padding: 0px 10%; }
+    @media screen and (max-width: 768px) {
+      #WelcomeMessage div {
+        padding: 0px 5%; } }
+
+#Content {
+  grid-area: specific; }
+
+#Navigation {
+  grid-area: navigation;
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  background-color: var(--global-primary-light-color); }
+  #Navigation > li {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 5px 8px;
+    font-weight: 600;
+    color: var(--global-primary-dark-color);
+    background-color: transparent;
+    transition-duration: 200ms;
+    transition-property: color, background-color;
+    cursor: pointer; }
+    #Navigation > li:hover {
+      background-color: var(--global-primary-dark-color);
+      color: var(--global-primary-color); }
+    #Navigation > li.selected {
+      color: var(--global-secondary-dark-color);
+      background-color: var(--global-secondary-light-color); }

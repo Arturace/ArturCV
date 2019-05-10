@@ -1,0 +1,32 @@
+$turquoise: #66C6BD;
+$turquoise-dark: #258E8E;
+$turquoise-light: #ACDDDA;
+
+$epic-pink: #EF4254;
+$less-epic-pink: #f45d6c;
+
+
+$primary-dark: #11B2B2;
+$primary: #57FAFA;
+$primary-light: #A3FFFF;
+
+$secondary-dark: #C28A69;
+$secondary: #FA9357;
+$secondary-light: #FFC5A3;
+
+:root {
+   --global-primary-color: #{$primary};
+   --global-primary-dark-color: #{$primary-dark};
+   --global-primary-light-color: #{$primary-light};
+
+   --global-secondary-color: #{$secondary};
+   --global-secondary-dark-color: #{$secondary-dark};
+   --global-secondary-light-color: #{$secondary-light};
+}
+
+$navigation-row-count: 1;
+$navigation-li-height: 30px;
+$navigation-li-tb-padding: 5px;
+$navigation-li-total-height: ($navigation-li-height + $navigation-li-tb-padding * 2) * $navigation-row-count;
+
+$full-screen-welcome-message-height: 548px;

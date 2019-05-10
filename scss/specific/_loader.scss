@@ -1,0 +1,52 @@
+$circle-size : 200px;
+$triangle-count : 5;
+
+page-loader {
+   position: relative;
+   display: flex;
+   width: $circle-size;
+   height: $circle-size;
+   border-radius: 50%; 
+   border-color:red;
+   border-width: 3px;
+ 
+   .triangle {
+      display: block;
+      position: absolute;
+      top:  50%; 
+      left: 50%;
+      
+
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 25px 43.3px 25px;
+      border-color: transparent transparent #7b9bbd transparent;
+      //animation-name: example;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      transform-origin: center;
+      $increment : 0.2;
+      $increment-origin : 20;
+       
+      $angle: (360 / $triangle-count);
+      $rot: 0;
+
+      @for $i from 1 through 5 {
+         &:nth-of-type(#{$i}){
+            //transform-origin: #{1% * $increment-origin * ($i - 1)};
+            //transform: translate(#{1% * $increment-origin * ($i - 1)});
+            animation-delay: #{$increment * ($i - 1)}s; 
+            transform: rotate($rot * 1deg)  translate($circle-size / 2) rotate($rot * -1deg);
+         }
+
+         $rot: $rot + $angle;
+      }
+   }
+
+   @keyframes example {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>THIS IS A TITLE!</title>
+      <link rel="stylesheet" type="text/css" href="css/fancy-ass-styles.css"/>
+      <script type="module" src="scripts/main.js"></script>
+   </head>
+   <body>
+      <div id="WelcomeMessage">
+         <h2>Greetings!</h2>
+         <div>
+            <p>
+               My name is Artur Madjidov. 
+               <br/>
+               I am currently a software developer.
+               <br/>
+               This static website is here to show you some technical info about me.
+            </p>
+         </div>
+      </div>
+      <ul id="Navigation">
+         <li data-fake-page="Programming">Programming</li>
+         <li data-fake-page="Multimedia">Multimedia</li>
+      </ul>
+      <div id="Content">
+      </div>
+      <fake-page id="Programming" hidden>
+         <span>Programming!</span>
+      </fake-page>
+      <fake-page id="Multimedia" hidden>
+         <span>Multimedia!</span>
+      </fake-page>
+   </body>
+</html>
