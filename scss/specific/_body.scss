@@ -6,14 +6,14 @@ body {
    margin: 0px;
    display: grid;
    grid-template-columns: 1fr;
-   grid-template-rows: min-content #{($navigation-li-height + $navigation-li-tb-padding * 2) * $navigation-row-count} 1fr;
+   grid-template-rows: min-content #{$navigation-li-total-height} 1fr;
    grid-template-areas: "WelcomeMessage " "navigation" "specific";
    transition: grid-template-rows 200ms;
    background-color: var(--global-primary-dark-color);
 
-   @media screen and (max-height: $full-screen-welcome-message-height ) { 
-      grid-template-rows: 1fr #{($navigation-li-height + $navigation-li-tb-padding * 2) * $navigation-row-count} min-content;
-   }
+   // @media screen and (max-height: $full-screen-welcome-message-height ) { 
+   //    grid-template-rows: 1fr #{($navigation-li-height + $navigation-li-tb-padding * 2) * $navigation-row-count} min-content;
+   // }
 
    &.content-shown {
       @media screen and (max-height: $full-screen-welcome-message-height ) { 

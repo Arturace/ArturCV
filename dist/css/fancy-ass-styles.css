@@ -3,8 +3,8 @@
   --global-primary-dark-color: #11B2B2;
   --global-primary-light-color: #A3FFFF;
   --global-secondary-color: #FA9357;
-  --global-secondary-dark-color: #C28A69;
-  --global-secondary-light-color: #FFC5A3; }
+  --global-secondary-dark-color: #ba7246;
+  --global-secondary-light-color: #ffd1b7; }
 
 html, body {
   height: 100%; }
@@ -18,13 +18,34 @@ body {
   transition: grid-template-rows 200ms;
   background-color: var(--global-primary-dark-color); }
   @media screen and (max-height: 548px) {
-    body {
-      grid-template-rows: 1fr 40px min-content; } }
-  @media screen and (max-height: 548px) {
     body.content-shown {
       grid-template-rows: min-content 40px 1fr; } }
   body.content-shown #WelcomeMessage {
     max-height: 0px; }
+
+fake-page {
+  display: flex;
+  height: 100%;
+  width: 100%; }
+
+#Content ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  height: calc(100% - 40px); }
+  #Content ul li {
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "header content";
+    height: 10%;
+    padding: 5px 10px; }
+    #Content ul li > div:first-child {
+      grid-area: 'header'; }
+    #Content ul li > div:last-child {
+      grid-area: 'content'; }
 
 page-loader {
   position: relative;
@@ -105,7 +126,13 @@ page-loader {
         padding: 0px 5%; } }
 
 #Content {
-  grid-area: specific; }
+  grid-area: specific;
+  transition-property: color, background-color;
+  transition-duration: 200ms; }
+
+body.content-shown #Content {
+  color: var(--global-secondary-dark-color);
+  background-color: var(--global-secondary-light-color); }
 
 #Navigation {
   grid-area: navigation;

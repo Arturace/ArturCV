@@ -1,3 +1,12 @@
 #Content {
    grid-area: specific;
+   transition-property: color, background-color;
+   transition-duration: 200ms;
+}
+
+body.content-shown {
+   #Content {
+      color: var(--global-secondary-dark-color);
+      background-color: var(--global-secondary-light-color);
+   }
 }
