@@ -1,7 +1,10 @@
+@import "../mixins/mGeneral.scss";
+
 #Content {
    grid-area: specific;
    transition-property: color, background-color;
    transition-duration: 200ms;
+   @include applyContentPadding();
 }
 
 body.content-shown {

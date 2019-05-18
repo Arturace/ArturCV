@@ -4,7 +4,10 @@
   --global-primary-light-color: #A3FFFF;
   --global-secondary-color: #FA9357;
   --global-secondary-dark-color: #ba7246;
-  --global-secondary-light-color: #ffd1b7; }
+  --global-secondary-light-color: #ffd1b7;
+  --standard-content-side-padding: 10%;
+  --mobile-content-side-padding: 5%;
+  --top-content-padding: 7px; }
 
 html, body {
   height: 100%; }
@@ -120,15 +123,19 @@ page-loader {
     align-content: flex-end;
     justify-content: flex-end;
     transition: padding 250ms ease-in-out;
-    padding: 0px 10%; }
+    padding: 7px var(--standard-content-side-padding); }
     @media screen and (max-width: 768px) {
       #WelcomeMessage div {
-        padding: 0px 5%; } }
+        padding: 7px var(--mobile-content-side-padding); } }
 
 #Content {
   grid-area: specific;
   transition-property: color, background-color;
-  transition-duration: 200ms; }
+  transition-duration: 200ms;
+  padding: 7px var(--standard-content-side-padding); }
+  @media screen and (max-width: 768px) {
+    #Content {
+      padding: 7px var(--mobile-content-side-padding); } }
 
 body.content-shown #Content {
   color: var(--global-secondary-dark-color);

@@ -1,3 +1,5 @@
+@import "../mixins/mGeneral.scss";
+
 $turquoise: #66C6BD;
 $turquoise-dark: #258E8E;
 $turquoise-light: #ACDDDA;
@@ -50,10 +52,7 @@ $less-epic-pink: #f45d6c;
       align-content: flex-end;
       justify-content: flex-end;
       transition: padding 250ms ease-in-out;
-      padding: 0px 10%;
-      
-      @media screen and (max-width: 768px) {
-         padding: 0px 5%;
-      }
+      @include applyContentPadding();
    }
 }
+
