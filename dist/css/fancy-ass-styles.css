@@ -35,20 +35,71 @@ fake-page {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: row;
+  list-style: none; }
+
+#Programming > ul {
   flex-direction: column;
-  list-style: none;
-  height: calc(100% - 40px); }
-  #Content ul li {
-    display: grid;
-    grid-template-columns: 0.2fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "header content";
-    height: 10%;
-    padding: 5px 10px; }
-    #Content ul li > div:first-child {
-      grid-area: 'header'; }
-    #Content ul li > div:last-child {
-      grid-area: 'content'; }
+  height: 100%;
+  width: 100%; }
+  #Programming > ul li[name="HaveExperience"], #Programming > ul li[name="Studied"], #Programming > ul li[name="NotEfficientEnough"] {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    flex-grow: 1; }
+    #Programming > ul li[name="HaveExperience"] > ul, #Programming > ul li[name="Studied"] > ul, #Programming > ul li[name="NotEfficientEnough"] > ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%; }
+      #Programming > ul li[name="HaveExperience"] > ul li, #Programming > ul li[name="Studied"] > ul li, #Programming > ul li[name="NotEfficientEnough"] > ul li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        flex-basis: 50%;
+        flex-grow: 1;
+        padding: 3px;
+        font-size: 1.2rem; }
+        #Programming > ul li[name="HaveExperience"] > ul li > div, #Programming > ul li[name="Studied"] > ul li > div, #Programming > ul li[name="NotEfficientEnough"] > ul li > div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          height: 100%;
+          width: 100%;
+          background-color: var(--global-secondary-color);
+          color: var(--global-secondary-light-color);
+          transition-property: background-color, color;
+          transition-duration: 200ms;
+          padding: 0px 25%;
+          position: relative; }
+        #Programming > ul li[name="HaveExperience"] > ul li:only-child, #Programming > ul li[name="HaveExperience"] > ul li:last-child:nth-child(odd), #Programming > ul li[name="Studied"] > ul li:only-child, #Programming > ul li[name="Studied"] > ul li:last-child:nth-child(odd), #Programming > ul li[name="NotEfficientEnough"] > ul li:only-child, #Programming > ul li[name="NotEfficientEnough"] > ul li:last-child:nth-child(odd) {
+          flex-basis: 100%; }
+  #Programming > ul li[name="HaveExperience"] {
+    max-height: 55%; }
+    #Programming > ul li[name="HaveExperience"] > ul > li > div {
+      background-color: #46E89F;
+      color: #146B36; }
+      #Programming > ul li[name="HaveExperience"] > ul > li > div:hover {
+        background-color: #146B36;
+        color: #46E89F; }
+  #Programming > ul li[name="Studied"] {
+    max-height: 35%; }
+    #Programming > ul li[name="Studied"] > ul > li > div {
+      background-color: #58C6FF;
+      color: #163240; }
+      #Programming > ul li[name="Studied"] > ul > li > div:hover {
+        background-color: #163240;
+        color: #58C6FF; }
+  #Programming > ul li[name="NotEfficientEnough"] {
+    max-height: 10%; }
+    #Programming > ul li[name="NotEfficientEnough"] > ul > li > div {
+      background-color: #3D1C40;
+      color: #B85AE8; }
+      #Programming > ul li[name="NotEfficientEnough"] > ul > li > div:hover {
+        background-color: #B85AE8;
+        color: #3D1C40; }
 
 page-loader {
   position: relative;
@@ -166,5 +217,6 @@ body.content-shown #Content {
       background-color: var(--global-primary-dark-color);
       color: var(--global-primary-color); }
     #Navigation > li.selected {
+      cursor: default;
       color: var(--global-secondary-dark-color);
       background-color: var(--global-secondary-light-color); }

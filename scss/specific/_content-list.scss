@@ -1,26 +1,9 @@
-#Content ul {
-   margin: 0;
-   padding: 0;
-   display: flex;
-   flex-direction: column;
-   list-style: none;
-   height: calc(100% - #{$navigation-li-total-height});
-
-   li {
-      display: grid;
-      grid-template-columns: 0.2fr 1fr;
-      grid-template-rows: 1fr;
-      grid-template-areas: "header content";
-
-      height: 10%;
-      padding: 5px 10px;
-      
-      > div:first-child {
-         grid-area: 'header';
-      }
-
-      > div:last-child {
-         grid-area: 'content';
-      }
+#Content { 
+   ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      list-style: none;
    }
 }
