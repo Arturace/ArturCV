@@ -59,6 +59,15 @@ var main : App;
          this.classList.add('selected');
       });
    });
+
+   // document.getElementsByName('HaveExperience').forEach((value) => {
+   //    console.log(value);
+   //    console.log(value.children);
+
+   //    Array.from(value.children).forEach(element => {
+   //       console.log(element);
+   //    });
+   // });
 //data-fake-page
 
    // let loader = new Loader();

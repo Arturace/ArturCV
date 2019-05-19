@@ -10,18 +10,25 @@
    background-color: var(--global-primary-light-color);
 
    > li {
-      height: $navigation-li-height;
       display: flex;
       justify-content: center;
       align-items: center;
+
+      height: $navigation-li-height;
       width: 50%;
       padding: $navigation-li-tb-padding 8px;
+      
+      cursor: pointer;
+      
       font-weight: 600;
+      font-size: 1.5rem;
+      user-select: none; 
       color: var(--global-primary-dark-color);
+
       background-color: transparent;
+
       transition-duration: 200ms;
       transition-property: color, background-color;
-      cursor: pointer;
 
       &:hover {
          background-color: var(--global-primary-dark-color);

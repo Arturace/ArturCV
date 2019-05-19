@@ -4,25 +4,29 @@
   --global-primary-light-color: #A3FFFF;
   --global-secondary-color: #FA9357;
   --global-secondary-dark-color: #ba7246;
-  --global-secondary-light-color: #ffd1b7;
+  --global-secondary-light-color: #fce9de;
   --standard-content-side-padding: 10%;
   --mobile-content-side-padding: 5%;
   --top-content-padding: 7px; }
 
+[hidden] {
+  display: none !important; }
+
 html, body {
-  height: 100%; }
+  height: 100%;
+  width: 100%; }
 
 body {
   margin: 0px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: min-content 40px 1fr;
+  grid-template-rows: min-content 60px 1fr;
   grid-template-areas: "WelcomeMessage " "navigation" "specific";
   transition: grid-template-rows 200ms;
   background-color: var(--global-primary-dark-color); }
   @media screen and (max-height: 548px) {
     body.content-shown {
-      grid-template-rows: min-content 40px 1fr; } }
+      grid-template-rows: min-content 60px 1fr; } }
   body.content-shown #WelcomeMessage {
     max-height: 0px; }
 
@@ -60,7 +64,9 @@ fake-page {
         flex-basis: 50%;
         flex-grow: 1;
         padding: 3px;
-        font-size: 1.2rem; }
+        cursor: pointer;
+        transition-property: all;
+        transition-duration: 800ms; }
         #Programming > ul li[name="HaveExperience"] > ul li > div, #Programming > ul li[name="Studied"] > ul li > div, #Programming > ul li[name="NotEfficientEnough"] > ul li > div {
           display: flex;
           justify-content: center;
@@ -70,30 +76,38 @@ fake-page {
           width: 100%;
           background-color: var(--global-secondary-color);
           color: var(--global-secondary-light-color);
+          font-weight: 700;
+          font-size: 1.5rem;
+          user-select: none;
           transition-property: background-color, color;
           transition-duration: 200ms;
           padding: 0px 25%;
           position: relative; }
-        #Programming > ul li[name="HaveExperience"] > ul li:only-child, #Programming > ul li[name="HaveExperience"] > ul li:last-child:nth-child(odd), #Programming > ul li[name="Studied"] > ul li:only-child, #Programming > ul li[name="Studied"] > ul li:last-child:nth-child(odd), #Programming > ul li[name="NotEfficientEnough"] > ul li:only-child, #Programming > ul li[name="NotEfficientEnough"] > ul li:last-child:nth-child(odd) {
-          flex-basis: 100%; }
+          @media screen and (max-width: 768px) {
+            #Programming > ul li[name="HaveExperience"] > ul li > div, #Programming > ul li[name="Studied"] > ul li > div, #Programming > ul li[name="NotEfficientEnough"] > ul li > div {
+              padding: 0px 10%; } }
+        #Programming > ul li[name="HaveExperience"] > ul li.active, #Programming > ul li[name="Studied"] > ul li.active, #Programming > ul li[name="NotEfficientEnough"] > ul li.active {
+          z-index: 10;
+          width: 100%;
+          height: 100%; }
   #Programming > ul li[name="HaveExperience"] {
     max-height: 55%; }
     #Programming > ul li[name="HaveExperience"] > ul > li > div {
-      background-color: #46E89F;
-      color: #146B36; }
+      background-color: #146B36;
+      color: #46E89F; }
       #Programming > ul li[name="HaveExperience"] > ul > li > div:hover {
-        background-color: #146B36;
-        color: #46E89F; }
+        background-color: #46E89F;
+        color: #146B36; }
   #Programming > ul li[name="Studied"] {
-    max-height: 35%; }
+    max-height: 30%; }
     #Programming > ul li[name="Studied"] > ul > li > div {
-      background-color: #58C6FF;
-      color: #163240; }
+      background-color: #163240;
+      color: #58C6FF; }
       #Programming > ul li[name="Studied"] > ul > li > div:hover {
-        background-color: #163240;
-        color: #58C6FF; }
+        background-color: #58C6FF;
+        color: #163240; }
   #Programming > ul li[name="NotEfficientEnough"] {
-    max-height: 10%; }
+    max-height: 15%; }
     #Programming > ul li[name="NotEfficientEnough"] > ul > li > div {
       background-color: #3D1C40;
       color: #B85AE8; }
@@ -158,14 +172,14 @@ page-loader {
   overflow: hidden;
   transition: max-height 200ms;
   max-height: 600px; }
-  #WelcomeMessage h2 {
+  #WelcomeMessage h1 {
     padding: 0px;
     margin: 0px;
     grid-area: 'greetings';
     transition: margin-top 250ms ease-in-out;
     margin-top: 20px; }
     @media screen and (max-height: 548px) {
-      #WelcomeMessage h2 {
+      #WelcomeMessage h1 {
         margin-top: 0px; } }
   #WelcomeMessage div {
     grid-area: message;
@@ -201,18 +215,20 @@ body.content-shown #Content {
   padding: 0px;
   background-color: var(--global-primary-light-color); }
   #Navigation > li {
-    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 50px;
     width: 50%;
     padding: 5px 8px;
+    cursor: pointer;
     font-weight: 600;
+    font-size: 1.5rem;
+    user-select: none;
     color: var(--global-primary-dark-color);
     background-color: transparent;
     transition-duration: 200ms;
-    transition-property: color, background-color;
-    cursor: pointer; }
+    transition-property: color, background-color; }
     #Navigation > li:hover {
       background-color: var(--global-primary-dark-color);
       color: var(--global-primary-color); }

@@ -12,7 +12,7 @@ $primary-light: #A3FFFF;
 
 $secondary-dark: #ba7246;
 $secondary: #FA9357;
-$secondary-light: #ffd1b7;
+$secondary-light: #fce9de;
 
 $standard-content-side-padding: 10%;
 $mobile-content-side-padding: 5%;
@@ -33,7 +33,7 @@ $top-content-padding: 7px;
 }
 
 $navigation-row-count: 1;
-$navigation-li-height: 30px;
+$navigation-li-height: 50px;
 $navigation-li-tb-padding: 5px;
 $navigation-li-total-height: ($navigation-li-height + $navigation-li-tb-padding * 2) * $navigation-row-count;
 
