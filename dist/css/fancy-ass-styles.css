@@ -7,7 +7,8 @@
   --global-secondary-light-color: #fce9de;
   --standard-content-side-padding: 10%;
   --mobile-content-side-padding: 5%;
-  --top-content-padding: 7px; }
+  --top-content-padding: 7px;
+  --padding-between-tiles: 1.2px; }
 
 [hidden] {
   display: none !important; }
@@ -32,88 +33,133 @@ body {
 
 fake-page {
   display: flex;
+  box-sizing: border-box;
+  width: 100%;
   height: 100%;
-  width: 100%; }
+  padding: 7px var(--standard-content-side-padding);
+  overflow: hidden;
+  grid-area: specific;
+  transition-property: color, background-color;
+  transition-duration: 200ms; }
+  @media screen and (max-width: 768px) {
+    fake-page {
+      padding: 7px var(--mobile-content-side-padding); } }
 
-#Content ul {
+body.content-shown fake-page {
+  color: var(--global-secondary-dark-color);
+  background-color: var(--global-secondary-light-color); }
+
+ul {
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: row;
   list-style: none; }
 
-#Programming > ul {
-  flex-direction: column;
-  height: 100%;
-  width: 100%; }
-  #Programming > ul li[name="HaveExperience"], #Programming > ul li[name="Studied"], #Programming > ul li[name="NotEfficientEnough"] {
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    flex-grow: 1; }
-    #Programming > ul li[name="HaveExperience"] > ul, #Programming > ul li[name="Studied"] > ul, #Programming > ul li[name="NotEfficientEnough"] > ul {
+#Programming {
+  position: relative; }
+  #Programming.detail > ul {
+    transform: rotateY(180deg); }
+  #Programming.detail #ProgrammingDetailContainer {
+    transform: rotateY(360deg); }
+  #Programming > ul, #Programming > #ProgrammingDetailContainer {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    position: absolute;
+    height: calc(100% - 14px);
+    flex-basis: 100%;
+    width: calc(100% - (2 *var(--standard-content-side-padding))); }
+  #Programming > ul {
+    z-index: 2;
+    flex-direction: column; }
+    #Programming > ul li[name="HaveExperience"], #Programming > ul li[name="Studied"], #Programming > ul li[name="NotEfficientEnough"] {
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
-      width: 100%; }
-      #Programming > ul li[name="HaveExperience"] > ul li, #Programming > ul li[name="Studied"] > ul li, #Programming > ul li[name="NotEfficientEnough"] > ul li {
+      flex-shrink: 0;
+      flex-grow: 1; }
+      #Programming > ul li[name="HaveExperience"] > ul, #Programming > ul li[name="Studied"] > ul, #Programming > ul li[name="NotEfficientEnough"] > ul {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-        flex-basis: 50%;
-        flex-grow: 1;
-        padding: 3px;
-        cursor: pointer;
-        transition-property: all;
-        transition-duration: 800ms; }
-        #Programming > ul li[name="HaveExperience"] > ul li > div, #Programming > ul li[name="Studied"] > ul li > div, #Programming > ul li[name="NotEfficientEnough"] > ul li > div {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%; }
+        #Programming > ul li[name="HaveExperience"] > ul li, #Programming > ul li[name="Studied"] > ul li, #Programming > ul li[name="NotEfficientEnough"] > ul li {
           display: flex;
           justify-content: center;
           align-items: center;
-          text-align: center;
-          height: 100%;
-          width: 100%;
-          background-color: var(--global-secondary-color);
-          color: var(--global-secondary-light-color);
-          font-weight: 700;
-          font-size: 1.5rem;
-          user-select: none;
-          transition-property: background-color, color;
-          transition-duration: 200ms;
-          padding: 0px 25%;
-          position: relative; }
-          @media screen and (max-width: 768px) {
-            #Programming > ul li[name="HaveExperience"] > ul li > div, #Programming > ul li[name="Studied"] > ul li > div, #Programming > ul li[name="NotEfficientEnough"] > ul li > div {
-              padding: 0px 10%; } }
-        #Programming > ul li[name="HaveExperience"] > ul li.active, #Programming > ul li[name="Studied"] > ul li.active, #Programming > ul li[name="NotEfficientEnough"] > ul li.active {
-          z-index: 10;
-          width: 100%;
-          height: 100%; }
-  #Programming > ul li[name="HaveExperience"] {
-    max-height: 55%; }
-    #Programming > ul li[name="HaveExperience"] > ul > li > div {
-      background-color: #146B36;
-      color: #46E89F; }
-      #Programming > ul li[name="HaveExperience"] > ul > li > div:hover {
-        background-color: #46E89F;
-        color: #146B36; }
-  #Programming > ul li[name="Studied"] {
-    max-height: 30%; }
-    #Programming > ul li[name="Studied"] > ul > li > div {
-      background-color: #163240;
-      color: #58C6FF; }
-      #Programming > ul li[name="Studied"] > ul > li > div:hover {
-        background-color: #58C6FF;
-        color: #163240; }
-  #Programming > ul li[name="NotEfficientEnough"] {
-    max-height: 15%; }
-    #Programming > ul li[name="NotEfficientEnough"] > ul > li > div {
-      background-color: #3D1C40;
-      color: #B85AE8; }
-      #Programming > ul li[name="NotEfficientEnough"] > ul > li > div:hover {
-        background-color: #B85AE8;
-        color: #3D1C40; }
+          box-sizing: border-box;
+          flex-basis: 50%;
+          flex-grow: 1;
+          padding: var(--padding-between-tiles);
+          cursor: pointer;
+          transition-property: all;
+          transition-duration: 800ms; }
+          #Programming > ul li[name="HaveExperience"] > ul li > div, #Programming > ul li[name="Studied"] > ul li > div, #Programming > ul li[name="NotEfficientEnough"] > ul li > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            width: 100%;
+            background-color: var(--global-secondary-color);
+            color: var(--global-secondary-light-color);
+            font-weight: 700;
+            font-size: 1.5rem;
+            user-select: none;
+            transition-property: background-color, color;
+            transition-duration: 200ms;
+            padding: 0px 25%;
+            position: relative; }
+            @media screen and (max-width: 768px) {
+              #Programming > ul li[name="HaveExperience"] > ul li > div, #Programming > ul li[name="Studied"] > ul li > div, #Programming > ul li[name="NotEfficientEnough"] > ul li > div {
+                padding: 0px 10%; } }
+    #Programming > ul li[name="HaveExperience"] {
+      max-height: 55%; }
+      #Programming > ul li[name="HaveExperience"] > ul > li > div {
+        background-color: #146B36;
+        color: #46E89F; }
+        #Programming > ul li[name="HaveExperience"] > ul > li > div:hover {
+          background-color: #46E89F;
+          color: #146B36; }
+    #Programming > ul li[name="Studied"] {
+      max-height: 30%; }
+      #Programming > ul li[name="Studied"] > ul > li > div {
+        background-color: #163240;
+        color: #58C6FF; }
+        #Programming > ul li[name="Studied"] > ul > li > div:hover {
+          background-color: #58C6FF;
+          color: #163240; }
+    #Programming > ul li[name="NotEfficientEnough"] {
+      max-height: 15%; }
+      #Programming > ul li[name="NotEfficientEnough"] > ul > li > div {
+        background-color: #3D1C40;
+        color: #B85AE8; }
+        #Programming > ul li[name="NotEfficientEnough"] > ul > li > div:hover {
+          background-color: #B85AE8;
+          color: #3D1C40; }
+  #Programming #ProgrammingDetailContainer {
+    z-index: 1;
+    transform: rotateY(180deg);
+    justify-content: center;
+    align-items: center; }
+
+#ProgrammingDetailContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem; }
+  #ProgrammingDetailContainer #CloseDetail {
+    grid-area: back;
+    background-color: transparent;
+    border: none;
+    display: flex; }
+    #ProgrammingDetailContainer #CloseDetail:focus {
+      outline: none; }
+  #ProgrammingDetailContainer #ProgrammingDetail {
+    grid-area: detail;
+    display: flex;
+    text-align: center; }
 
 page-loader {
   position: relative;

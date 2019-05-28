@@ -24,13 +24,28 @@
          <li data-fake-page="Programming">Programming</li>
          <li data-fake-page="Multimedia">Multimedia</li>
       </ul>
-      <div id="Content">
-      </div>
+      <!-- <div id="Content">
+      </div> -->
       <fake-page id="Programming" hidden script="scripts/programming.js">
          <ul>
             <li name="HaveExperience">
                <ul>
-                  <li><div>JavaScript & TypeScript</div></li>
+                  <li>
+                     <div>JavaScript & TypeScript</div>
+                     <div hidden>
+                        <p>
+                           I get to practice JavaScript frontend web developpement on a daily basis.
+                           <br/>
+                           <br/>
+                           I used to mainly use jQuery because of how less verbose the syntax seemed comapred to vanilla JS, 
+                           but with time I started to realize how powerfull vanilla JS is without the need of using jQuery.
+                           <br/>
+                           <br/>
+                           I find TypeScript to be an excelent tool to make complex functionnalities with JS, 
+                           as well as making you understand JS so much more.
+                        </p>
+                     </div>
+                  </li>
                   <li><div>HTML & CSS</div></li>
                   <li><div>SQL (T-SQL & Oracle)</div></li>
                   <li><div>C#</div></li>
@@ -48,34 +63,11 @@
                   <li><div>C++</div></li>
                </ul>
             </li>
-            <!-- <li>
-               <div>C#</div>
-               <div<>ASP.NET, MVC, WPF (preferred workspace: Visual Studio)</div>
-            </li>
-            <li>
-               <div>Java</div>
-               <div>
-                  Swing and Backend service development (preferred workspace: Netbeans)
-                  Main language studied in college, little to no practice after finishing it
-               </div>
-            </li>
-            <li>
-               <div>HTML</div>
-               <div>Frontend developpement</div>
-            </li>
-            <li>
-               <div>CSS</div>
-               <div>Frontend developpement</div>
-            </li>
-            <li>
-               <div>JS(Vanilla and jQuery)</div>
-               <div>Frontend developpement</div>
-            </li>
-            <li>
-               <div>C++</div>
-               <div>The most basic knowledge and almost no experience (preferred workspace: DevC++)</div>
-            </li> -->
          </ul>
+         <div id="ProgrammingDetailContainer">
+            <button id="CloseDetail">Close Detail</button>
+            <div id=ProgrammingDetail></div>
+         </div>
       </fake-page>
       <fake-page id="Multimedia" hidden>
          <span>Multimedia!</span>

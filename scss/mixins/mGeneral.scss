@@ -1,7 +1,11 @@
-@mixin applyContentPadding($top-bottom-padding: $top-content-padding){
+@mixin applyContentPadding($top-bottom-padding: $top-content-padding) {
    padding: $top-bottom-padding var(--standard-content-side-padding);
       
    @media screen and (max-width: 768px) {
       padding: $top-bottom-padding var(--mobile-content-side-padding);
    }
+}
+
+@mixin applyContentElementWidth() {
+   width: calc(100% - (2 *var(--standard-content-side-padding)));
 }

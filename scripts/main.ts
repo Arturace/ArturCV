@@ -47,7 +47,7 @@ class App {
 var main : App;
 
 (function(){
-   main = new App(document.getElementById('Content'));
+   main = new App(document.body);
 
    Array.from(<HTMLCollectionOf<HTMLLIElement>>document.getElementById('Navigation').children).forEach((value) => {
       value.addEventListener('click', function (){

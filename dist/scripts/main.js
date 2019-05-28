@@ -38,7 +38,7 @@ class App {
 }
 var main;
 (function () {
-    main = new App(document.getElementById('Content'));
+    main = new App(document.body);
     Array.from(document.getElementById('Navigation').children).forEach((value) => {
         value.addEventListener('click', function () {
             document.body.classList.add('content-shown');
