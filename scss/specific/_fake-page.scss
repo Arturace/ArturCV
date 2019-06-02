@@ -1,12 +1,15 @@
 @import "../mixins/mGeneral.scss";
 
 fake-page {
+   flex: 1 1 auto;
+
    display: flex;
+   flex-direction: column;
    // height: 100%;
    // width: 100%;
 
    box-sizing: border-box;
-   width: 100%;
+   // width: 100%;
    height: 100%;
    @include applyContentPadding();
 

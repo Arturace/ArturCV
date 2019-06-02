@@ -1,0 +1,85 @@
+#Programming > ul {
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+
+   overflow-y: hidden;
+   overflow-x: auto;
+   
+   > li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      box-sizing: border-box;
+      padding: var(--padding-between-tiles);
+
+      cursor: pointer;
+
+      > div {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+
+         height: 150px;
+         width: 150px;
+      }
+
+      margin-bottom: var(--padding-between-tiles);
+
+      &:last-child {
+         margin-bottom: 0;
+      }
+   }
+
+   $best: #146B36;
+   $best-dark: #46E89F;
+   $ok: #163240;
+   $ok-dark: #58C6FF;
+   $meh: #3D1C40;
+   $meh-dark: #B85AE8;
+
+   &.have-experience {
+      > li {
+         > div  {
+            background-color: $best;
+            color: $best-dark;
+
+            &:hover {
+               background-color: $best-dark;
+               color: $best;
+            }
+         }
+      }
+   }
+
+   &.studied {
+      > li {
+         > div  {
+            background-color: $ok;
+            color: $ok-dark;
+
+            &:hover {
+               background-color: $ok-dark;
+               color: $ok;
+            }
+         }
+      }
+   }
+
+   &.not-efficient-enough {
+      > li {
+         > div  {
+            background-color: $meh;
+            color: $meh-dark;
+
+            &:hover {
+               background-color: $meh-dark;
+               color: $meh;
+            }
+         }
+      }
+   }
+}

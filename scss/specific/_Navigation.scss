@@ -15,7 +15,8 @@
       align-items: center;
 
       height: $navigation-li-height;
-      width: 50%;
+      // width: 50%;
+      flex: 1 1 auto;
       padding: $navigation-li-tb-padding 8px;
       
       cursor: pointer;
