@@ -5,6 +5,7 @@ html, body {
 
 body {
    margin: 0px;
+   overflow: hidden;
    display: grid;
    grid-template-columns: 1fr;
    grid-template-rows: min-content #{$navigation-li-total-height} 1fr;

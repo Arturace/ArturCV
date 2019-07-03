@@ -13,6 +13,7 @@ export class FakePage extends HTMLElement {
       if (this.hasAttribute('script')) {
          if (!window[this.id + 'script']) {
             let script = document.createElement('script');
+            script.setAttribute('type', 'module');
             script.setAttribute('src', this.getAttribute('script') + '?v=' + Date.now().toString()); //Forcing to reload the script
             script.id = this.id + 'script';
             document.head.appendChild(script);
