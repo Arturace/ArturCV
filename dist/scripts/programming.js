@@ -10,11 +10,10 @@ programmingOverlay.onHide = () => {
 };
 Array.from(document.getElementById('Programming').getElementsByTagName('ul')).forEach((ulEl) => {
     Array.from(ulEl.children).forEach(element => {
-        element.addEventListener('click', function () {
+        let div = element.children.item(0);
+        div.addEventListener('click', function () {
             if (element.children.length > 1) {
                 programmingOverlay.show();
-                element.classList.toggle('active');
-                let div = element.children.item(0);
                 let hoverDiv = document.createElement('div');
                 hoverDiv.innerHTML = element.children.item(1).innerHTML;
                 hoverDiv.style.top = div.getBoundingClientRect().top + 'px';

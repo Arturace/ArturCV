@@ -13,7 +13,8 @@ fake-page {
    height: 100%;
    @include applyContentPadding();
 
-   overflow: hidden;
+   overflow-y: hidden;
+   overflow-x: auto;
 
    grid-area: specific;
    transition-property: color, background-color;

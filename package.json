@@ -8,8 +8,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "scss": "node-sass --watch scss/fancy-ass-styles.scss -o dist/css"
+    ,"type-script": "tsc"
   },
   "author": "Artur Madjidov",
   "license": "ISC"
