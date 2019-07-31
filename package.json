@@ -4,12 +4,13 @@
   "description": "Artur Madjidov's CV",
   "main": "main.js",
   "dependencies": {
+    "http-server": "^0.11.1",
     "node-sass": "^4.12.0"
   },
   "devDependencies": {},
   "scripts": {
-    "scss": "node-sass --watch scss/fancy-ass-styles.scss -o dist/css"
-    ,"type-script": "tsc"
+    "scss": "node-sass --watch scss/fancy-ass-styles.scss -o dist/css",
+    "ts:build": "tsc --watch"
   },
   "author": "Artur Madjidov",
   "license": "ISC"
