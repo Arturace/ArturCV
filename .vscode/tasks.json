@@ -9,15 +9,21 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
-        }
-        ,{
+            },
+            "problemMatcher": [
+                "$tsc"
+            ]
+        },
+        {
             "type": "npm",
             "script": "scss",
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": [
+                "$node-sass"
+            ]
         }
     ]
 }

@@ -6,6 +6,10 @@ class App {
    public currentPage: FakePage = null;
    public loader: Loader = null;
 
+   /**
+    * Defines the custom Html Elements
+    * @param container will contain the current fake-page
+    */
    constructor(
       public container: HTMLElement = document.body
    ) {
@@ -23,6 +27,7 @@ class App {
             || this.pages[a].id.trim() == ''){
                throw 'A FakePage has to have an id';
          } else {
+            //Removing the fake-page from the DOM
             this.pages[a].parentElement.removeChild(this.pages[a]);
             this.pages[a].removeAttribute('hidden');
             this.pages[a].container = container;
@@ -30,6 +35,10 @@ class App {
       }
    }
 
+   /**
+    * Unloads the current page, loads the new one and sets the currentPage
+    * @param pageId id of the fake-page to load
+    */
    public load(pageId: string): void {
       this.loader.show();
       for (let a: number = 0; a < this.pages.length; a++){
@@ -40,7 +49,9 @@ class App {
             this.currentPage = this.pages[a];
          }
       }
-      this.loader.hide();
+      /*setTimeout(() => {
+         this.loader.hide();
+      }, 5000);*/
    }
 }
 
@@ -49,11 +60,13 @@ var main : App;
 (function(){
    main = new App(document.body);
 
-   Array.from(<HTMLCollectionOf<HTMLLIElement>>document.getElementById('Navigation').children).forEach((value) => {
+   //Caching navigation elements
+   let cachedNavigationElements : Array<HTMLElement> = Array.from(<HTMLCollectionOf<HTMLLIElement>>document.getElementById('Navigation').children); 
+   cachedNavigationElements.forEach((value) => {
       value.addEventListener('click', function (){
          document.body.classList.add('content-shown');
          main.load(this.getAttribute('data-fake-page'));
-         Array.from(<HTMLCollectionOf<HTMLLIElement>>document.getElementById('Navigation').children).forEach((value) => {
+         cachedNavigationElements.forEach((value) => {
             value.classList.remove('selected');
          });
          this.classList.add('selected');

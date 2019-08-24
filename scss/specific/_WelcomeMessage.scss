@@ -19,7 +19,7 @@ $less-epic-pink: #f45d6c;
    display: grid;
    grid-template-columns: 1fr;
    grid-template-rows: 0.2fr 1fr;
-   grid-template-areas: "greetings " "message";
+   grid-template-areas: "greetings" "message";
 
    color: var(--global-primary-light-color);
    background-color: var(--global-primary-dark-color);

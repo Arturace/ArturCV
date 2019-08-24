@@ -33,17 +33,17 @@ class App {
                 this.currentPage = this.pages[a];
             }
         }
-        this.loader.hide();
     }
 }
 var main;
 (function () {
     main = new App(document.body);
-    Array.from(document.getElementById('Navigation').children).forEach((value) => {
+    let cachedNavigationElements = Array.from(document.getElementById('Navigation').children);
+    cachedNavigationElements.forEach((value) => {
         value.addEventListener('click', function () {
             document.body.classList.add('content-shown');
             main.load(this.getAttribute('data-fake-page'));
-            Array.from(document.getElementById('Navigation').children).forEach((value) => {
+            cachedNavigationElements.forEach((value) => {
                 value.classList.remove('selected');
             });
             this.classList.add('selected');

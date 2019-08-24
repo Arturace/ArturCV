@@ -33,7 +33,7 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: min-content 60px 1fr;
-  grid-template-areas: "WelcomeMessage " "navigation" "specific";
+  grid-template-areas: "WelcomeMessage" "navigation" "specific";
   transition: grid-template-rows 200ms;
   background-color: var(--global-primary-dark-color); }
   @media screen and (max-height: 548px) {
@@ -192,44 +192,53 @@ ul {
     text-align: center; }
 
 page-loader {
-  position: relative;
+  z-index: 2;
+  position: absolute;
+  top: calc(50% - 100px);
+  left: calc(50% - 100px);
   display: flex;
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border-color: red;
-  border-width: 3px; }
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite; }
   page-loader .triangle {
     display: block;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
+    width: 15px;
+    height: 15px;
     border-style: solid;
-    border-width: 0 25px 43.3px 25px;
-    border-color: transparent transparent #7b9bbd transparent;
+    border-width: 2px;
+    border-color: #7b9bbd;
+    animation-name: basic-rotation;
     animation-duration: 3s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    animation-direction: reverse;
     transform-origin: center; }
     page-loader .triangle:nth-of-type(1) {
       animation-delay: 0s;
-      transform: rotate(0deg) translate(100px) rotate(0deg); }
+      top: calc(7.5px + 0%);
+      left: calc(7.5px + 0%); }
     page-loader .triangle:nth-of-type(2) {
       animation-delay: 0.2s;
-      transform: rotate(72deg) translate(100px) rotate(-72deg); }
+      top: calc(7.5px + 72%);
+      left: calc(7.5px + 72%); }
     page-loader .triangle:nth-of-type(3) {
       animation-delay: 0.4s;
-      transform: rotate(144deg) translate(100px) rotate(-144deg); }
+      top: calc(7.5px + 144%);
+      left: calc(7.5px + 144%); }
     page-loader .triangle:nth-of-type(4) {
       animation-delay: 0.6s;
-      transform: rotate(216deg) translate(100px) rotate(-216deg); }
+      top: calc(7.5px + 216%);
+      left: calc(7.5px + 216%); }
     page-loader .triangle:nth-of-type(5) {
       animation-delay: 0.8s;
-      transform: rotate(288deg) translate(100px) rotate(-288deg); }
+      top: calc(7.5px + 288%);
+      left: calc(7.5px + 288%); }
 
-@keyframes example {
+@keyframes basic-rotation {
   from {
     transform: rotate(0deg); }
   to {
@@ -239,7 +248,7 @@ page-loader {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 0.2fr 1fr;
-  grid-template-areas: "greetings " "message";
+  grid-template-areas: "greetings" "message";
   color: var(--global-primary-light-color);
   background-color: var(--global-primary-dark-color);
   text-align: center;

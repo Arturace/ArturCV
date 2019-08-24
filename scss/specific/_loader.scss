@@ -1,32 +1,50 @@
-$circle-size : 200px;
+$circle-radius : 100px;
+$circle-size : $circle-radius * 2;
 $triangle-count : 5;
 
 page-loader {
-   position: relative;
+   z-index: 2;
+   position: absolute;
+   top: calc(50% - #{$circle-radius});
+   left: calc(50% - #{$circle-radius});
    display: flex;
    width: $circle-size;
    height: $circle-size;
    border-radius: 50%; 
-   border-color:red;
-   border-width: 3px;
+   // border-color:red;
+   // border-width: 3px;
+   // border-style: solid;
  
-   .triangle {
-      display: block;
-      position: absolute;
-      top:  50%; 
-      left: 50%;
-      
-
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 25px 43.3px 25px;
-      border-color: transparent transparent #7b9bbd transparent;
-      //animation-name: example;
+   // animation-name: basic-rotation;
       animation-duration: 3s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
+
+   .triangle {
+      $shape-width: 15px;
+      $shape-height: 15px;
+
+      display: block;
+      position: absolute;
+      // top:  calc(50% - #{$shape-height / 2}); 
+      // left: calc(50% - #{$shape-width / 2});
+      
+      width: $shape-width;
+      height: $shape-height;
+
+      border-style: solid;
+      //border-width: 0 25px 43.3px 25px;
+      border-width: 2px;
+      //border-color: transparent transparent #7b9bbd transparent;
+      border-color: #7b9bbd;
+      animation-name: basic-rotation;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: reverse;
       transform-origin: center;
+
+
       $increment : 0.2;
       $increment-origin : 20;
        
@@ -38,15 +56,18 @@ page-loader {
             //transform-origin: #{1% * $increment-origin * ($i - 1)};
             //transform: translate(#{1% * $increment-origin * ($i - 1)});
             animation-delay: #{$increment * ($i - 1)}s; 
-            transform: rotate($rot * 1deg)  translate($circle-size / 2) rotate($rot * -1deg);
+            //transform: rotate($rot * 1deg)  translate($circle-size / 2) rotate($rot * -1deg);
+            //transform: rotate($rot * 1deg) rotate($rot * -1deg);
+            top:  calc(#{$shape-height / 2} + #{$rot+ '%'}); 
+            left: calc(#{$shape-width / 2} + #{$rot + '%'});
          }
 
          $rot: $rot + $angle;
       }
    }
 
-   @keyframes example {
+   @keyframes basic-rotation {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
-    }
+   }
 }
