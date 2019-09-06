@@ -1,3 +1,6 @@
+@import "../trigonometry.scss";
+@import "../mixins/mGeneral.scss";
+
 $circle-radius : 100px;
 $circle-size : $circle-radius * 2;
 $triangle-count : 5;
@@ -11,14 +14,14 @@ page-loader {
    width: $circle-size;
    height: $circle-size;
    border-radius: 50%; 
-   // border-color:red;
-   // border-width: 3px;
-   // border-style: solid;
- 
-   // animation-name: basic-rotation;
-      animation-duration: 3s;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
+   // border: solid 3px red;
+
+   animation-name: basic-rotation;
+   animation-duration: 3s;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+
+   @include hiddenButActive();
 
    .triangle {
       $shape-width: 15px;
@@ -36,8 +39,9 @@ page-loader {
       //border-width: 0 25px 43.3px 25px;
       border-width: 2px;
       //border-color: transparent transparent #7b9bbd transparent;
-      border-color: #7b9bbd;
-      animation-name: basic-rotation;
+      border-color: var(--global-primary-dark-color);
+      background-color: var(--global-primary-light-color);
+      // animation-name: basic-rotation;
       animation-duration: 3s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -58,8 +62,10 @@ page-loader {
             animation-delay: #{$increment * ($i - 1)}s; 
             //transform: rotate($rot * 1deg)  translate($circle-size / 2) rotate($rot * -1deg);
             //transform: rotate($rot * 1deg) rotate($rot * -1deg);
-            top:  calc(#{$shape-height / 2} + #{$rot+ '%'}); 
-            left: calc(#{$shape-width / 2} + #{$rot + '%'});
+            // top:  calc(#{$shape-height / 2} + #{$rot+ '%'}); 
+            // left: calc(#{$shape-width / 2} + #{$rot + '%'});
+            top: sin($rot * ($pi / 180)) * ($circle-radius / 1) + $circle-radius - ($shape-width / 2);
+            left: cos($rot * ($pi / 180)) * ($circle-radius / 1) + $circle-radius - ($shape-width / 2);
          }
 
          $rot: $rot + $angle;

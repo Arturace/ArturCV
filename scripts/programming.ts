@@ -1,14 +1,13 @@
 import { Overlay } from "./overlay.js";
 
-let programmingOverlay = new Overlay();
-programmingOverlay.onHide = () => {
+let programmingOverlay = new Overlay(0, false, true, () => {
    Array.from(document.getElementsByClassName('programming-hover-item')).forEach((el: HTMLDivElement) => {
       el.style.top ='150vh';
       setTimeout(() => {
          document.body.removeChild(el);
       }, 200);
    });
-};
+});
 
 Array.from(document.getElementById('Programming').getElementsByTagName('ul')).forEach((ulEl) => {
    Array.from(ulEl.children).forEach(element => {

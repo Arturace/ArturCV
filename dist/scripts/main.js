@@ -1,14 +1,17 @@
 import { FakePage } from "./page.js";
 import { Loader } from "./loader.js";
+import { Overlay } from "./overlay.js";
 class App {
     constructor(container = document.body) {
         this.container = container;
         this.pages = [];
         this.currentPage = null;
         this.loader = null;
+        this.overlay = null;
         window.customElements.define('page-loader', Loader);
         window.customElements.define('fake-page', FakePage);
         this.loader = new Loader();
+        this.overlay = new Overlay(200, true);
         this.pages = Array.from(document.getElementsByTagName("fake-page"));
         for (let a = 0; a < this.pages.length; a++) {
             if (this.pages[a].id == null
@@ -24,6 +27,7 @@ class App {
         }
     }
     load(pageId) {
+        this.overlay.show();
         this.loader.show();
         for (let a = 0; a < this.pages.length; a++) {
             if (this.pages[a].id == pageId) {
@@ -33,6 +37,10 @@ class App {
                 this.currentPage = this.pages[a];
             }
         }
+        setTimeout(() => {
+            this.overlay.hide();
+            this.loader.hide();
+        }, 200);
     }
 }
 var main;

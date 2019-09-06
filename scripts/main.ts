@@ -1,11 +1,12 @@
 import { FakePage } from "./page.js";
 import { Loader } from "./loader.js";
+import { Overlay } from "./overlay.js";
 
 class App {
    public pages: FakePage[] = [];
    public currentPage: FakePage = null;
    public loader: Loader = null;
-
+   public overlay: Overlay = null;
    /**
     * Defines the custom Html Elements
     * @param container will contain the current fake-page
@@ -17,6 +18,8 @@ class App {
       window.customElements.define('fake-page', FakePage);
       //Make a loader
       this.loader = new Loader();
+      //Make a pageOverlay
+      this.overlay = new Overlay(200, true);
       //Get all fake pages
       this.pages = Array.from(<HTMLCollectionOf<FakePage>>document.getElementsByTagName("fake-page"));
 
@@ -40,6 +43,7 @@ class App {
     * @param pageId id of the fake-page to load
     */
    public load(pageId: string): void {
+      this.overlay.show();
       this.loader.show();
       for (let a: number = 0; a < this.pages.length; a++){
          if (this.pages[a].id == pageId) {
@@ -49,15 +53,16 @@ class App {
             this.currentPage = this.pages[a];
          }
       }
-      /*setTimeout(() => {
+      setTimeout(() => {
+         this.overlay.hide();
          this.loader.hide();
-      }, 5000);*/
+      }, 200);
    }
 }
 
 var main : App;
 
-(function(){
+(function() {
    main = new App(document.body);
 
    //Caching navigation elements

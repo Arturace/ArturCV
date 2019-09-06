@@ -11,9 +11,11 @@ export class Loader extends HTMLElement {
 
    public show() {
       document.body.append(this);
+      setTimeout(() => { this.classList.add('active'); }, 1);      
    }
 
    public hide() {
-      document.body.removeChild(this);
+      this.classList.remove('active');
+      setTimeout(() => { document.body.removeChild(this); }, 200);      
    }
 }

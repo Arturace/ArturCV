@@ -3,18 +3,26 @@ export class Overlay {
    
    constructor(
       public animationLength: number = 200
+      , public page: boolean = false  
+      , public hideOnClick: boolean = false
       , public onHide: () => void = null) 
    {
       this.mainDiv = document.createElement('div');
       this.mainDiv.classList.add('overlay');
-      this.mainDiv.addEventListener('click', () => {
-         this.hide();
-      });
+      if (this.page) {
+         this.mainDiv.classList.add('page');
+      }
+      if (this.hideOnClick) {
+         this.mainDiv.addEventListener('click', () => {
+            this.hide();
+         });
+      }
    }
 
    public show() {
       document.body.appendChild(this.mainDiv);
-      setTimeout(() => { this.mainDiv.classList.add('active'); }, 0);      
+      setTimeout(() => { this.mainDiv.classList.add('active'); }, 1);      
+      //this.mainDiv.classList.add('active');  
    }
 
    public hide() {

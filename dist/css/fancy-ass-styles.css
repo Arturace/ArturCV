@@ -19,6 +19,8 @@
   transition: opacity 200ms linear; }
   .overlay.active {
     opacity: 1; }
+  .overlay.page {
+    z-index: 1; }
 
 [hidden] {
   display: none !important; }
@@ -200,9 +202,16 @@ page-loader {
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  animation-name: basic-rotation;
   animation-duration: 3s;
   animation-timing-function: linear;
-  animation-iteration-count: infinite; }
+  animation-iteration-count: infinite;
+  opacity: 0;
+  transition: opacity 200ms linear; }
+  page-loader.active {
+    opacity: 1; }
+  page-loader.page {
+    z-index: 1; }
   page-loader .triangle {
     display: block;
     position: absolute;
@@ -210,8 +219,8 @@ page-loader {
     height: 15px;
     border-style: solid;
     border-width: 2px;
-    border-color: #7b9bbd;
-    animation-name: basic-rotation;
+    border-color: var(--global-primary-dark-color);
+    background-color: var(--global-primary-light-color);
     animation-duration: 3s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -219,24 +228,24 @@ page-loader {
     transform-origin: center; }
     page-loader .triangle:nth-of-type(1) {
       animation-delay: 0s;
-      top: calc(7.5px + 0%);
-      left: calc(7.5px + 0%); }
+      top: 92.5px;
+      left: 192.5px; }
     page-loader .triangle:nth-of-type(2) {
       animation-delay: 0.2s;
-      top: calc(7.5px + 72%);
-      left: calc(7.5px + 72%); }
+      top: 187.60565px;
+      left: 123.4017px; }
     page-loader .triangle:nth-of-type(3) {
       animation-delay: 0.4s;
-      top: calc(7.5px + 144%);
-      left: calc(7.5px + 144%); }
+      top: 151.27853px;
+      left: 11.5983px; }
     page-loader .triangle:nth-of-type(4) {
       animation-delay: 0.6s;
-      top: calc(7.5px + 216%);
-      left: calc(7.5px + 216%); }
+      top: 33.72147px;
+      left: 11.5983px; }
     page-loader .triangle:nth-of-type(5) {
       animation-delay: 0.8s;
-      top: calc(7.5px + 288%);
-      left: calc(7.5px + 288%); }
+      top: -2.6056px;
+      left: 123.40193px; }
 
 @keyframes basic-rotation {
   from {

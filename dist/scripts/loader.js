@@ -10,8 +10,10 @@ export class Loader extends HTMLElement {
     }
     show() {
         document.body.append(this);
+        setTimeout(() => { this.classList.add('active'); }, 1);
     }
     hide() {
-        document.body.removeChild(this);
+        this.classList.remove('active');
+        setTimeout(() => { document.body.removeChild(this); }, 200);
     }
 }

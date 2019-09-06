@@ -9,3 +9,16 @@
 @mixin applyContentElementWidth() {
    width: calc(100% - (2 *var(--standard-content-side-padding)));
 }
+
+@mixin hiddenButActive($transition-length: 200ms) {
+   opacity: 0;
+   transition: opacity $transition-length linear;
+
+   &.active {
+      opacity: 1;
+   }
+
+   &.page {
+      z-index: 1;
+   }
+}
