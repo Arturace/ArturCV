@@ -1,8 +1,8 @@
-@import "../../mixins/mGeneral.scss";
-@import "./_list.scss";
-@import "./_coloring.scss";
-
 #Programming {
+   @import "../../mixins/mGeneral.scss";
+   @import "./_list.scss";
+   // @import "./_coloring.scss";
+
    //transform-style: preserve-3d;
    //perspective: 1000px; /* Remove this if you don't want the 3D effect */
    position: relative;

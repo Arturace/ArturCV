@@ -71,92 +71,99 @@ ul {
   flex-direction: row;
   list-style: none; }
 
-.programming-hover-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: absolute;
-  padding: 11px;
-  height: 150px;
-  width: 150px;
-  transition-property: opacity, width, height, top, left;
-  transition-duration: 200ms;
-  transition-timing-function: linear; }
-  .programming-hover-item.in-middle {
-    top: calc(50% - 187.5px);
-    left: calc(50% - 187.5px);
-    min-height: 375px;
-    width: 375px; }
-
-#Programming > ul {
-  width: 100%;
-  display: flex;
-  flex-shrink: 0;
-  flex-direction: row;
-  justify-content: flex-start;
-  overflow-y: hidden;
-  overflow-x: auto; }
-  #Programming > ul > li {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    box-sizing: border-box;
-    padding: var(--padding-between-tiles);
-    margin-bottom: var(--padding-between-tiles); }
-    #Programming > ul > li:first-child {
-      padding-left: 0px; }
-    #Programming > ul > li:last-child {
-      padding-right: 0px; }
-    #Programming > ul > li > div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      transition-property: width, height;
-      transition-duration: 200ms;
-      transition-timing-function: linear;
-      min-height: 150px;
-      width: 150px;
-      cursor: pointer; }
-    #Programming > ul > li:last-child {
-      margin-bottom: 0; }
-
-.programming-hover-item.have-experience {
-  background-color: #146B36;
-  color: #46E89F; }
-
-.programming-hover-item.studied {
-  background-color: #163240;
-  color: #58C6FF; }
-
-.programming-hover-item.not-efficient-enough {
-  background-color: #3D1C40;
-  color: #B85AE8; }
-
-#Programming > ul.have-experience > li > div {
-  background-color: #146B36;
-  color: #46E89F; }
-  #Programming > ul.have-experience > li > div:hover {
-    background-color: #46E89F;
-    color: #146B36; }
-
-#Programming > ul.studied > li > div {
-  background-color: #163240;
-  color: #58C6FF; }
-  #Programming > ul.studied > li > div:hover {
-    background-color: #58C6FF;
-    color: #163240; }
-
-#Programming > ul.not-efficient-enough > li > div {
-  background-color: #3D1C40;
-  color: #B85AE8; }
-  #Programming > ul.not-efficient-enough > li > div:hover {
-    background-color: #B85AE8;
-    color: #3D1C40; }
-
 #Programming {
   position: relative; }
+  #Programming .list-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start; }
+    #Programming .list-container .list-decorator {
+      min-height: 150px;
+      width: 150px;
+      flex-shrink: 0;
+      margin: var(--padding-between-tiles);
+      margin-right: calc(var(--padding-between-tiles) * 2);
+      margin-bottom: calc(var(--padding-between-tiles) * 2);
+      background: linear-gradient(135deg, var(--global-secondary-light-color) 50%, #090979 50%); }
+    #Programming .list-container > ul {
+      width: calc(100% - 150px - var(--padding-between-tiles));
+      display: flex;
+      flex-shrink: 0;
+      flex-direction: row;
+      justify-content: flex-start;
+      overflow-y: hidden;
+      overflow-x: auto; }
+      #Programming .list-container > ul > li {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding: var(--padding-between-tiles);
+        margin-bottom: var(--padding-between-tiles); }
+        #Programming .list-container > ul > li:first-child {
+          padding-left: 0px; }
+        #Programming .list-container > ul > li:last-child {
+          padding-right: 0px; }
+        #Programming .list-container > ul > li > div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          transition-property: width, height;
+          transition-duration: 200ms;
+          transition-timing-function: linear;
+          min-height: 150px;
+          width: 150px;
+          cursor: pointer; }
+        #Programming .list-container > ul > li:last-child {
+          margin-bottom: 0; }
+    #Programming .list-container.have-experience .list-decorator {
+      background: linear-gradient(135deg, var(--global-secondary-light-color) 50%, #146B36 50%); }
+    #Programming .list-container.have-experience > ul > li > div {
+      background-color: #146B36;
+      color: #46E89F; }
+      #Programming .list-container.have-experience > ul > li > div:hover {
+        background-color: #46E89F;
+        color: #146B36; }
+    #Programming .list-container.studied .list-decorator {
+      background: linear-gradient(135deg, var(--global-secondary-light-color) 50%, #163240 50%); }
+    #Programming .list-container.studied > ul > li > div {
+      background-color: #163240;
+      color: #58C6FF; }
+      #Programming .list-container.studied > ul > li > div:hover {
+        background-color: #58C6FF;
+        color: #163240; }
+    #Programming .list-container.not-efficient-enough .list-decorator {
+      background: linear-gradient(135deg, var(--global-secondary-light-color) 50%, #3D1C40 50%); }
+    #Programming .list-container.not-efficient-enough > ul > li > div {
+      background-color: #3D1C40;
+      color: #B85AE8; }
+      #Programming .list-container.not-efficient-enough > ul > li > div:hover {
+        background-color: #B85AE8;
+        color: #3D1C40; }
+  #Programming .programming-hover-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    padding: 11px;
+    height: 150px;
+    width: 150px;
+    transition-property: opacity, width, height, top, left;
+    transition-duration: 200ms;
+    transition-timing-function: linear; }
+    #Programming .programming-hover-item.in-middle {
+      top: calc(50% - 187.5px);
+      left: calc(50% - 187.5px);
+      min-height: 375px;
+      width: 375px; }
+    #Programming .programming-hover-item.have-experience {
+      background-color: #146B36;
+      color: #46E89F; }
+    #Programming .programming-hover-item.studied {
+      background-color: #163240;
+      color: #58C6FF; }
   #Programming.detail > ul {
     transform: rotateY(180deg); }
   #Programming.detail #ProgrammingDetailContainer {
