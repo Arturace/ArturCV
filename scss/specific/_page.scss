@@ -1,6 +1,6 @@
 @import "../mixins/mGeneral.scss";
 
-fake-page {
+#page {
    flex: 1 1 auto;
 
    display: flex;
@@ -22,7 +22,7 @@ fake-page {
 }
 
 body.content-shown {
-   fake-page {
+   #page {
       color: var(--global-secondary-dark-color);
       background-color: var(--global-secondary-light-color);
    }

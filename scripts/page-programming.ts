@@ -9,7 +9,7 @@ let programmingOverlay = new Overlay(0, false, true, () => {
    });
 });
 
-Array.from(document.getElementById('Programming').getElementsByTagName('ul')).forEach((ulEl) => {
+Array.from(document.querySelector('[current-page="programming"]').getElementsByTagName('ul')).forEach((ulEl) => {
    Array.from(ulEl.children).forEach(element => {
       let div: HTMLDivElement = (element as HTMLLinkElement).children.item(0) as HTMLDivElement;
 

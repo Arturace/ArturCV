@@ -1,7 +1,7 @@
 :root {
   --global-primary-color: #57FAFA;
   --global-primary-dark-color: #11B2B2;
-  --global-primary-light-color: #A3FFFF;
+  --global-primary-light-color: #bafdfd;
   --global-secondary-color: #ff9151;
   --global-secondary-dark-color: #aa5724;
   --global-secondary-light-color: #fffbf8;
@@ -44,7 +44,7 @@ body {
   body.content-shown #WelcomeMessage {
     max-height: 0px; }
 
-fake-page {
+#page {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -57,10 +57,10 @@ fake-page {
   transition-property: color, background-color;
   transition-duration: 200ms; }
   @media screen and (max-width: 768px) {
-    fake-page {
+    #page {
       padding: 7px var(--mobile-content-side-padding); } }
 
-body.content-shown fake-page {
+body.content-shown #page {
   color: var(--global-secondary-dark-color);
   background-color: var(--global-secondary-light-color); }
 
@@ -71,13 +71,13 @@ ul {
   flex-direction: row;
   list-style: none; }
 
-#Programming {
+[current-page="programming"] {
   position: relative; }
-  #Programming .list-container {
+  [current-page="programming"] .list-container {
     display: flex;
     flex-direction: row;
     justify-content: start; }
-    #Programming .list-container .list-decorator {
+    [current-page="programming"] .list-container .list-decorator {
       min-height: 150px;
       width: 150px;
       flex-shrink: 0;
@@ -85,7 +85,7 @@ ul {
       margin-right: calc(var(--padding-between-tiles) * 2);
       margin-bottom: calc(var(--padding-between-tiles) * 2);
       background: linear-gradient(135deg, var(--global-secondary-light-color) 50%, #090979 50%); }
-    #Programming .list-container > ul {
+    [current-page="programming"] .list-container > ul {
       width: calc(100% - 150px - var(--padding-between-tiles));
       display: flex;
       flex-shrink: 0;
@@ -93,18 +93,18 @@ ul {
       justify-content: flex-start;
       overflow-y: hidden;
       overflow-x: auto; }
-      #Programming .list-container > ul > li {
+      [current-page="programming"] .list-container > ul > li {
         display: flex;
         justify-content: center;
         align-items: flex-start;
         box-sizing: border-box;
         padding: var(--padding-between-tiles);
         margin-bottom: var(--padding-between-tiles); }
-        #Programming .list-container > ul > li:first-child {
+        [current-page="programming"] .list-container > ul > li:first-child {
           padding-left: 0px; }
-        #Programming .list-container > ul > li:last-child {
+        [current-page="programming"] .list-container > ul > li:last-child {
           padding-right: 0px; }
-        #Programming .list-container > ul > li > div {
+        [current-page="programming"] .list-container > ul > li > div {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -115,33 +115,33 @@ ul {
           min-height: 150px;
           width: 150px;
           cursor: pointer; }
-        #Programming .list-container > ul > li:last-child {
+        [current-page="programming"] .list-container > ul > li:last-child {
           margin-bottom: 0; }
-    #Programming .list-container.have-experience .list-decorator {
+    [current-page="programming"] .list-container.have-experience .list-decorator {
       background: linear-gradient(135deg, var(--global-secondary-light-color) 50%, #146B36 50%); }
-    #Programming .list-container.have-experience > ul > li > div {
+    [current-page="programming"] .list-container.have-experience > ul > li > div {
       background-color: #146B36;
       color: #46E89F; }
-      #Programming .list-container.have-experience > ul > li > div:hover {
+      [current-page="programming"] .list-container.have-experience > ul > li > div:hover {
         background-color: #46E89F;
         color: #146B36; }
-    #Programming .list-container.studied .list-decorator {
+    [current-page="programming"] .list-container.studied .list-decorator {
       background: linear-gradient(135deg, var(--global-secondary-light-color) 50%, #163240 50%); }
-    #Programming .list-container.studied > ul > li > div {
+    [current-page="programming"] .list-container.studied > ul > li > div {
       background-color: #163240;
       color: #58C6FF; }
-      #Programming .list-container.studied > ul > li > div:hover {
+      [current-page="programming"] .list-container.studied > ul > li > div:hover {
         background-color: #58C6FF;
         color: #163240; }
-    #Programming .list-container.not-efficient-enough .list-decorator {
+    [current-page="programming"] .list-container.not-efficient-enough .list-decorator {
       background: linear-gradient(135deg, var(--global-secondary-light-color) 50%, #3D1C40 50%); }
-    #Programming .list-container.not-efficient-enough > ul > li > div {
+    [current-page="programming"] .list-container.not-efficient-enough > ul > li > div {
       background-color: #3D1C40;
       color: #B85AE8; }
-      #Programming .list-container.not-efficient-enough > ul > li > div:hover {
+      [current-page="programming"] .list-container.not-efficient-enough > ul > li > div:hover {
         background-color: #B85AE8;
         color: #3D1C40; }
-  #Programming .programming-hover-item {
+  [current-page="programming"] .programming-hover-item {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,22 +153,22 @@ ul {
     transition-property: opacity, width, height, top, left;
     transition-duration: 200ms;
     transition-timing-function: linear; }
-    #Programming .programming-hover-item.in-middle {
+    [current-page="programming"] .programming-hover-item.in-middle {
       top: calc(50% - 187.5px);
       left: calc(50% - 187.5px);
       min-height: 375px;
       width: 375px; }
-    #Programming .programming-hover-item.have-experience {
+    [current-page="programming"] .programming-hover-item.have-experience {
       background-color: #146B36;
       color: #46E89F; }
-    #Programming .programming-hover-item.studied {
+    [current-page="programming"] .programming-hover-item.studied {
       background-color: #163240;
       color: #58C6FF; }
-  #Programming.detail > ul {
+  [current-page="programming"].detail > ul {
     transform: rotateY(180deg); }
-  #Programming.detail #ProgrammingDetailContainer {
+  [current-page="programming"].detail #ProgrammingDetailContainer {
     transform: rotateY(360deg); }
-  #Programming > #ProgrammingDetailContainer {
+  [current-page="programming"] > #ProgrammingDetailContainer {
     transition: transform 0.8s;
     transform-style: preserve-3d;
     backface-visibility: hidden;
@@ -176,7 +176,7 @@ ul {
     height: calc(100% - 14px);
     flex-basis: 100%;
     width: calc(100% - (2 *var(--standard-content-side-padding))); }
-  #Programming #ProgrammingDetailContainer {
+  [current-page="programming"] #ProgrammingDetailContainer {
     z-index: 1;
     transform: rotateY(180deg);
     justify-content: center;
@@ -200,7 +200,7 @@ ul {
     display: flex;
     text-align: center; }
 
-page-loader {
+load-indcator {
   z-index: 2;
   position: absolute;
   top: calc(50% - 100px);
@@ -215,11 +215,11 @@ page-loader {
   animation-iteration-count: infinite;
   opacity: 0;
   transition: opacity 200ms linear; }
-  page-loader.active {
+  load-indcator.active {
     opacity: 1; }
-  page-loader.page {
+  load-indcator.page {
     z-index: 1; }
-  page-loader .triangle {
+  load-indcator .triangle {
     display: block;
     position: absolute;
     width: 15px;
@@ -233,23 +233,23 @@ page-loader {
     animation-iteration-count: infinite;
     animation-direction: reverse;
     transform-origin: center; }
-    page-loader .triangle:nth-of-type(1) {
+    load-indcator .triangle:nth-of-type(1) {
       animation-delay: 0s;
       top: 92.5px;
       left: 192.5px; }
-    page-loader .triangle:nth-of-type(2) {
+    load-indcator .triangle:nth-of-type(2) {
       animation-delay: 0.2s;
       top: 187.60565px;
       left: 123.4017px; }
-    page-loader .triangle:nth-of-type(3) {
+    load-indcator .triangle:nth-of-type(3) {
       animation-delay: 0.4s;
       top: 151.27853px;
       left: 11.5983px; }
-    page-loader .triangle:nth-of-type(4) {
+    load-indcator .triangle:nth-of-type(4) {
       animation-delay: 0.6s;
       top: 33.72147px;
       left: 11.5983px; }
-    page-loader .triangle:nth-of-type(5) {
+    load-indcator .triangle:nth-of-type(5) {
       animation-delay: 0.8s;
       top: -2.6056px;
       left: 123.40193px; }
@@ -276,7 +276,7 @@ page-loader {
   #WelcomeMessage h1 {
     padding: 0px;
     margin: 0px;
-    grid-area: 'greetings';
+    grid-area: greetings;
     transition: margin-top 250ms ease-in-out;
     margin-top: 20px; }
     @media screen and (max-height: 548px) {
@@ -315,7 +315,7 @@ body.content-shown #Content {
   margin: 0px;
   padding: 0px;
   background-color: var(--global-primary-light-color); }
-  #Navigation > li {
+  #Navigation > page-loader {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -330,10 +330,10 @@ body.content-shown #Content {
     background-color: transparent;
     transition-duration: 200ms;
     transition-property: color, background-color; }
-    #Navigation > li:hover {
+    #Navigation > page-loader:hover {
       background-color: var(--global-primary-dark-color);
       color: var(--global-primary-color); }
-    #Navigation > li.selected {
+    #Navigation > page-loader.selected {
       cursor: default;
       color: var(--global-secondary-dark-color);
       background-color: var(--global-secondary-light-color); }
