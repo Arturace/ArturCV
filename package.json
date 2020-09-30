@@ -14,6 +14,7 @@
     "build:scss-w": "node-sass scss/fancy-ass-styles.scss -o dist/css --watch",
     "build:ts": "tsc",
     "build:ts-w": "tsc --watch",
+    "build": "npm run build:scss && npm run build:ts",
     "serve": "http-server dist"
   },
   "author": "Artur Madjidov",
