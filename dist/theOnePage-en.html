@@ -4,27 +4,119 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="description" content="Artur Madjidov's curriculum vitae"/>
-      <title>THIS IS A TITLE!</title>
-      <link rel="stylesheet" type="text/css" href="css/fancy-ass-styles.css"/>
-      <script type="module" src="scripts/main.js"></script>
+      <title>Artur Madjidov | FullStack Dev</title>
+      <style>
+         :root {
+            --box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.25);
+            --separator-border: 1px solid #000;
+         }
+
+         body {
+            display: flex;
+            margin: 0px;
+            width: 100vw;
+            height: 100vh;
+         }
+
+         body > div {
+            height: 100%;
+         }
+                  
+         .pane, li, ul {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+         }
+
+         .pane {
+            width: 50%;
+            flex-direction: column;
+            padding: 0 5%;
+         }
+
+         .hr, .hv {
+            box-shadow: var(--box-shadow);
+         }
+            .hr {
+               width: 100%;
+               border-bottom: var(--separator-border);
+            }
+            .hv {
+               height: 100%;
+               border-left: var(--separator-border);
+            }
+
+         ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+         }
+
+         .technos {
+            overflow: auto;
+         }
+
+         .technos li {
+            width: 100px;
+            height: 100px;
+            /* border: 1px solid black; */
+            margin: 7px;
+            box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.25);
+         }
+
+         img {
+            max-width:100%;
+            max-height:100%;
+         }
+
+         .id > *:not(.hr) {
+            margin: 0.5em 0;
+         }
+
+         .socials li {
+            width: 40px;
+            height: 40px;
+         }
+      </style>
    </head>
    <body>
-      <div id="WelcomeMessage">
-         <h1>Greetings!</h1>
-         <div>
-            <p>
-               My name is Artur Madjidov. 
-               <br/>
-               I'm a software developer.
-               <br/>
-               This static website is here to show you some info about me.
-            </p>
-         </div>
+      <div class="pane id">
+         <h1>Artur Madjidov</h1>
+          <div class="hr"></div>
+         <h2>Full stack developer</h2>
+         <div class="hr"></div>
+         <ul class="socials">
+            <li><a href="https://github.com/Arturace"><img src="img/github.svg" alt="GitHub"/></a></li>
+            <li><a href="https://www.linkedin.com/in/artur-madjidov/"><img src="img/linkedin.svg" alt="LinkedIn"/></a></li>
+         </ul>
       </div>
-      <nav id="Navigation">
-         <page-loader target="#page" page-name="programming" html="/programming.html" script="scripts/page-programming.js">Programming</page-loader>
-         <page-loader target="#page" page-name="multimedia" html="/multimedia.html">Multimedia</page-loader>
-      </nav>
-      <div id="page"></div>
+      <div class="hv"></div>
+      <div class="pane">
+         <ul class="technos">
+            <li title="JavaScript"><img src="img/js.png" alt="JavaScript"/></li>
+            <li title="ASP.NET MVC"><img src="img/asp_net_mvc.jpg" alt="ASP.NET MVC" /></li>
+            <li title="CSS"><img src="img/css.png" alt="CSS"/></li>
+            <li title="SCSS"><img src="img/scss.png" alt="SCSS"/></li>
+            <li>SQL</li>
+            <li>HTML</li>
+            <li>NodeJS</li>
+            <li>jQuery</li>
+            <li>Cypress</li>
+            <li>Bootstrap</li>
+            <li>C</li>
+            <li>C++</li>
+            <li>Vue</li>
+            <li>React</li>
+            <li>Angular</li>
+            <li>Ghostscript</li>
+            <li>Webpack</li>
+            <li>WPF</li>
+            <li>Visual Basic</li>
+            <li>Java</li>
+         </ul>
+      </div>
    </body>
 </html>
