@@ -12,14 +12,16 @@
          }
 
          body {
-            display: flex;
+            display: grid;
             margin: 0px;
             width: 100vw;
             height: 100vh;
+            overflow: hidden;
          }
 
          body > div {
             height: 100%;
+            overflow: hidden;
          }
                   
          .pane, li, ul {
@@ -30,21 +32,19 @@
          }
 
          .pane {
-            width: 50%;
             flex-direction: column;
             padding: 0 5%;
          }
 
-         .hr, .hv {
-            box-shadow: var(--box-shadow);
+         .separator {
+            background-color: black;
+            overflow: hidden;
          }
-            .hr {
-               width: 100%;
-               border-bottom: var(--separator-border);
+            .-vertical {
+               width: 1px;
             }
-            .hv {
-               height: 100%;
-               border-left: var(--separator-border);
+            .-horizontal {
+               height: 1px;
             }
 
          ul {
@@ -76,24 +76,55 @@
             margin: 0.5em 0;
          }
 
+         .id > div {
+            display: flex;
+         }
+
+         .id > div .separator {
+            margin: 0 .5em;
+         }
+
          .socials li {
             width: 40px;
             height: 40px;
+         }
+
+         @media screen and (min-width: 900px) {
+            body {
+               grid-template: 'pane1 separator pane2';
+               grid-template-columns: 1fr 1px 1fr;
+            }
+         }
+
+         @media screen and (max-width: 900px) {
+            body {
+               grid-template: 'pane1' 'pane2';
+               grid-template-rows: min-content 1fr;
+            }
+
+            body > div {
+               height: unset;
+            }
+
+            body > .separator {
+               display: none;
+            }
          }
       </style>
    </head>
    <body>
       <div class="pane id">
          <h1>Artur Madjidov</h1>
-          <div class="hr"></div>
-         <h2>Full stack developer</h2>
-         <div class="hr"></div>
-         <ul class="socials">
-            <li><a href="https://github.com/Arturace"><img src="img/github.svg" alt="GitHub"/></a></li>
-            <li><a href="https://www.linkedin.com/in/artur-madjidov/"><img src="img/linkedin.svg" alt="LinkedIn"/></a></li>
-         </ul>
+         <div>
+            <h2>Full stack developer</h2>
+            <div class="separator -vertical"></div>
+            <ul class="socials">
+               <li><a href="https://github.com/Arturace"><img src="img/github.svg" alt="GitHub"/></a></li>
+               <li><a href="https://www.linkedin.com/in/artur-madjidov/"><img src="img/linkedin.svg" alt="LinkedIn"/></a></li>
+            </ul>
+         </div>
       </div>
-      <div class="hv"></div>
+      <div class="separator"></div>
       <div class="pane">
          <ul class="technos">
             <li title="JavaScript"><img src="img/js.png" alt="JavaScript"/></li>
