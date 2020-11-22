@@ -1,0 +1,41 @@
+{
+  "socials": {
+    "logosPath": "img/socials/",
+    "logos": [
+      {
+        "title": "GitHub",
+        "path": "github.svg",
+        "href": "https://github.com/Arturace"
+      },
+      {
+        "title": "LinkedIn",
+        "path": "linkedin.svg",
+        "href": "https://www.linkedin.com/in/artur-madjidov/"
+      }
+    ]
+  },
+  "technos" : {
+    "logosPath": "img/technos/",
+    "logos": [
+      { "title": "JavaScript", "path": "js.png"},
+      { "title": "ASP.NET MVC", "path": "ASP.NET MVC.jpg"},
+      { "title": "CSS", "path": "css.png"},
+      { "title": "SCSS", "path": "scss.png"},
+      { "title": "HTML", "path": "HTML.png"},
+      { "title": "NodeJS", "path": "NodeJS.svg"},
+      { "title": "jQuery", "path": "jQuery.png"},
+      { "title": "Cypress", "path": "Cypress.png"},
+      { "title": "Bootstrap", "path": "Bootstrap.png"},
+      { "title": "C", "path": "C.png"},
+      { "title": "C++", "path": "cpp.png"},
+      { "title": "Vue", "path": "vuejs.png"},
+      { "title": "React", "path": "React.png"},
+      { "title": "Angular", "path": "Angular.png"},
+      { "title": "Ghostscript", "path": "Ghostscript.png"},
+      { "title": "Webpack", "path": "Webpack.png"},
+      { "title": "WPF", "path": "WPF.png"},
+      { "title": "Visual Basic", "path": "vb_net.jpg"},
+      { "title": "Java", "path": "Java.png"}
+    ]
+  }
+}

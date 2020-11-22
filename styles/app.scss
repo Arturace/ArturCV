@@ -1,0 +1,109 @@
+:root {
+  --box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.25);
+}
+
+body {
+  display: grid;
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  > div {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+li,
+ul,
+.pane {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.pane {
+  flex-direction: column;
+  padding: 0 5%;
+}
+
+.separator {
+  background-color: black;
+  overflow: hidden;
+
+  &.-vertical {
+    height: 100%;
+    width: 1px;
+  }
+
+  &.-horizontal {
+    width: 100%;
+    height: 1px;
+  }
+}
+
+.technos,
+.technos ul {
+  overflow: auto;
+}
+
+.technos ul li {
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  /* border: 1px solid black; */
+  margin: 7px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.25);
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.id {
+  > *:not(.hr) {
+    margin: 0.5em 0;
+  }
+
+  > div {
+    display: flex;
+
+    .separator {
+      margin: 0 0.5em;
+    }
+  }
+}
+
+.socials li {
+  width: 40px;
+  height: 40px;
+}
+
+@media screen and (min-width: 900px) {
+  body {
+    grid-template: "pane1 separator pane2";
+    grid-template-columns: 1fr 1px 1fr;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  body {
+    grid-template: "pane1" "pane2";
+    grid-template-rows: min-content 1fr;
+
+    > div {
+      height: unset;
+    }
+
+    > .separator {
+      display: none;
+    }
+  }
+
+  .technos {
+    justify-content: start;
+  }
+}

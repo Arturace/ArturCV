@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="{{it.lang}}">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Artur Madjidov's curriculum vitae"/>
+      <title>Artur Madjidov | {{it.myTitle}}</title>
+      <style>
+         img {
+            width: 50px;
+         }
+
+         ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+         }
+      </style>
+      <link rel="stylesheet" href="stylez.min.css">
+   </head>
+   <body>
+      <div class="pane id">
+         <h2>{{it.myTitle}}</h2>
+         <div class="separator -horizontal"></div>
+         <div>
+         <h1>Artur Madjidov</h1>
+            <div class="separator -vertical"></div>
+            <ul class="socials">
+               {{@each(it.socials.logos) => logo}}
+                  <li>
+                     <a href="{{logo.href}}">
+                        <img
+                           src="{{it.socials.logosPath}}{{logo.path}}" 
+                           alt="{{logo.title}}"/>
+                     </a>
+                  </li>
+               {{/each}}
+            </ul>
+         </div>
+         <div class="separator -horizontal"></div>
+         <h3>{{it.headline}}</h3>
+      </div>
+      <div class="separator"></div>
+      <div class="pane technos">
+         <ul>
+            {{@each(it.technos.logos) => logo}}
+               <li title="{{logo.title}}">
+                  {{@if(logo.path)}}
+                     <img
+                     src="{{it.technos.logosPath}}{{logo.path}}" 
+                     alt="{{logo.title}}" />
+                  {{#else}}
+                     {{logo.title}}
+                  {{/if}}
+               </li>
+            {{/each}}
+         </ul>
+      </div>
+   </body>
+</html>
