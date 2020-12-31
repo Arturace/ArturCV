@@ -1,28 +1,14 @@
 const path = require('path');
 const fs = require('fs');
 
-const DEPLOY_LOCATION = path.join(
-  __dirname
-  , process.argv.length > 2 
-    ? process.argv[2] 
-    : 'local-deploy');
-const DIST_DIR = path.join(__dirname, 'dist/');
+const DIST_DIR = path.join(process.cwd(), 'dist/');
 const HTML_DIR = path.join(DIST_DIR, 'html/');
 const SPECIFIC_BAHAVIOR_DIRS = {
-  'html': () => {
+  'html': (deployLocation) => {
     fs.readdirSync(HTML_DIR)
-      .forEach(html => copy(path.join(HTML_DIR, html), path.join(DEPLOY_LOCATION, html)));
+      .forEach(html => copy(path.join(HTML_DIR, html), path.join(deployLocation, html)));
   }
 };
-
-deleteFolderRecursive(DEPLOY_LOCATION);
-fs.mkdirSync(DEPLOY_LOCATION);
-
-fs.readdirSync(DIST_DIR)
-  .forEach(f => {
-    if (SPECIFIC_BAHAVIOR_DIRS[f]) SPECIFIC_BAHAVIOR_DIRS[f]()
-    else copy(path.join(DIST_DIR, f), path.join(DEPLOY_LOCATION, f))
-  });
 
 /**
  * https://stackoverflow.com/a/32197381/7095512
@@ -57,4 +43,20 @@ function copy(srcPath, destPath) {
     });
   } else
     fs.copyFileSync(srcPath, destPath);
+};
+
+module.exports = function () {
+  const DEPLOY_LOCATION = path.join(
+    process.cwd()
+    , process.argv.length > 2 
+      ? process.argv[2] 
+      : 'local-deploy/');
+  deleteFolderRecursive(DEPLOY_LOCATION);
+  fs.mkdirSync(DEPLOY_LOCATION);
+
+  fs.readdirSync(DIST_DIR)
+    .forEach(f => {
+      if (SPECIFIC_BAHAVIOR_DIRS[f]) SPECIFIC_BAHAVIOR_DIRS[f](DEPLOY_LOCATION);
+      else copy(path.join(DIST_DIR, f), path.join(DEPLOY_LOCATION, f))
+    });
 };

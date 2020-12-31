@@ -10,8 +10,10 @@
     "squirrelly": "^8.0.8"
   },
   "scripts": {
-    "build": "node build.js",
-    "deploy:local": "npm run build && node deploy.js local-deploy && http-server local-deploy"
+    "build": "node dev/build.js",
+    "deploy:local": "node dev/deploy.js local-deploy",
+    "serve": "npm run build && npm run deploy:local && START /B http-server local-deploy &",
+    "serve-w": "npm run serve && node dev/deploy-watch.js"
   },
   "author": "Artur Madjidov",
   "license": "ISC"

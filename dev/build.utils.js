@@ -3,14 +3,11 @@ const PATH = require('path');
 const FS = require('fs');
 const MINIFY = require('minify');
 
-const OUT_DIR = PATH.join(__dirname, 'dist/');
-
-build_html();
-build_scss();
+const OUT_DIR = PATH.join(process.cwd(), 'dist/');
 
 function build_html() {
   const HTML_OUT_DIR = PATH.join(OUT_DIR, 'html/');
-  const DATA_DIR_NAME = PATH.join(__dirname, 'template-data');
+  const DATA_DIR_NAME = PATH.join(process.cwd(), 'template-data');
   const DATA_LANG_DIR_NAME = PATH.join(DATA_DIR_NAME, 'per-lang');
   const DATAS_PER_LANG = FS.readdirSync(DATA_LANG_DIR_NAME);
   const TEMPLATE = FS.readFileSync('template.html', 'utf8');
@@ -50,20 +47,24 @@ function mergeObjects(obj1, obj2) {
   for (var p in obj2) {
     try {
       // Property in destination object set; update its value.
-      if (obj2[p].constructor == Object) {
+      if (obj2[p].constructor == Object)
         obj1[p] = mergeObjects(obj1[p], obj2[p]);
-
-      } else {
+      else
         obj1[p] = obj2[p];
-
-      }
-
     } catch (e) {
       // Property in destination object not set; create it and set its value.
       obj1[p] = obj2[p];
-
     }
   }
 
   return obj1;
 }
+
+module.exports = {
+  build_html
+  , build_scss
+  , build: () => {
+    build_html();
+    build_scss();
+  }
+};
