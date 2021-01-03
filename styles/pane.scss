@@ -1,0 +1,7 @@
+@use "_shared.scss" as SHARED;
+
+.pane {
+  @extend %centered-flex;
+  flex-direction: column;
+  padding: 0 5%;
+}

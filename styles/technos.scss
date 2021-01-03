@@ -1,0 +1,25 @@
+@use "_vars.scss" as VARS;
+
+.technos,
+.technos ul {
+  overflow: auto;
+}
+
+.technos ul li {
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  /* border: 1px solid black; */
+  margin: 7px;
+  box-shadow: var(--box-shadow);
+
+  img {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: VARS.$media-switch-at) {
+  .technos {
+    justify-content: start;
+  }
+}
