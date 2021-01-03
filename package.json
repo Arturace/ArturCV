@@ -12,8 +12,8 @@
   "scripts": {
     "build": "node dev/build.js",
     "deploy:local": "node dev/deploy.js local-deploy",
-    "serve": "npm run build && npm run deploy:local && START /B http-server local-deploy &",
-    "serve-w": "npm run serve && node dev/deploy-watch.js"
+    "serve": "npm run build && npm run deploy:local && http-server local-deploy",
+    "serve-w": "node dev/deploy-watch.js"
   },
   "author": "Artur Madjidov",
   "license": "ISC"
