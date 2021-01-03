@@ -7,7 +7,7 @@
       <title>Artur Madjidov | {{it.myTitle}}</title>
       <style>
          img {
-            width: 50px;
+            width: 100px;
          }
 
          ul {
@@ -30,7 +30,7 @@
             <ul class="socials">
                {{@each(it.socials.logos) => logo}}
                   <li>
-                     <a href="{{logo.href}}">
+                     <a href="{{logo.href}}" title="{{logo.title}}">
                         <img
                            src="{{it.socials.logosPath}}{{logo.path}}" 
                            alt="{{logo.title}}"/>
