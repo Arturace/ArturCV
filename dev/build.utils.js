@@ -5,28 +5,50 @@ const MINIFY = require('minify');
 
 const OUT_DIR = PATH.join(process.cwd(), 'dist/');
 
+function read_json_file(filePath) {
+  return FS.readFileSync(filePath, { encoding: 'utf8' });
+}
+
+function parse_json_file(filePath) {
+  return JSON.parse(read_json_file(filePath));
+}
+
 function build_html() {
+  console.log('Building HTML');
   const HTML_OUT_DIR = PATH.join(OUT_DIR, 'html/');
   const DATA_DIR_NAME = PATH.join(process.cwd(), 'template-data');
   const DATA_LANG_DIR_NAME = PATH.join(DATA_DIR_NAME, 'per-lang');
-  const DATAS_PER_LANG = FS.readdirSync(DATA_LANG_DIR_NAME);
-  const TEMPLATE = FS.readFileSync('template.html', 'utf8');
-  const SHARED_DATA = require(PATH.join(DATA_DIR_NAME, 'shared.json'), 'utf8');
+  let template, datasPerLang;
+  try {
+    const SHARED_DATA = read_json_file(PATH.join(DATA_DIR_NAME, 'shared.json'));
+    datasPerLang = FS
+    .readdirSync(DATA_LANG_DIR_NAME)
+    .map(d => ({
+      data: mergeObjects(
+        JSON.parse(SHARED_DATA)
+        , parse_json_file(PATH.join(DATA_LANG_DIR_NAME, d)))
+      , fileName: d
+    }));
+    template = FS.readFileSync('template.html', 'utf8');
+  } catch (e) {
+    console.error('Failed to fetch data files.', e);
+  }
 
   if (!FS.existsSync(HTML_OUT_DIR))
     FS.mkdirSync(HTML_OUT_DIR);
-  DATAS_PER_LANG.forEach(d => {
+  datasPerLang.forEach(dpl => {
+    const FILE_NAME = `${PATH.join(HTML_OUT_DIR, dpl.fileName.slice(0, -4 /*json*/))}html`;
+    if (FS.existsSync(FILE_NAME))
+      FS.unlinkSync(FILE_NAME);
     FS.writeFileSync(
-      `${PATH.join(HTML_OUT_DIR, d.slice(0, -4 /*json*/))}html`
-      , SQRL.render(
-        TEMPLATE
-        , mergeObjects(SHARED_DATA, require(PATH.join(DATA_LANG_DIR_NAME, d)))
-      )
+      FILE_NAME
+      , SQRL.render(template, dpl.data)
     );
   });
 }
 
 async function build_scss() {
+  console.log('Building SCSS');
   const OUT_CSS_FNAME = 'dist/stylez.css';
   const OUT_CSS_MIN_FNAME = 'dist/stylez.min.css';
   const SASS = require('sass');
