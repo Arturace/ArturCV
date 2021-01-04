@@ -4,3 +4,9 @@
   justify-content: center;
   text-align: center;
 }
+
+%drop-shadow {
+  margin: 7px;
+  padding: 5px;
+  box-shadow: var(--box-shadow);
+}

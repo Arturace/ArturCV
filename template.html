@@ -74,4 +74,15 @@
          </div>
       </div>
    </body>
+   <script type="text/javascript">
+      const TECHNOS = document.querySelectorAll('.technos ul li');
+      const CURSOR_OFFSET_SIZE = parseFloat(window.getComputedStyle(TECHNOS[0]).backgroundSize.split(' ')[0].replace('px', '')) / 2;
+      document.body.onmousemove = (e) =>
+         TECHNOS.forEach(t => 
+            t.style.setProperty(
+               'background-position'
+               , `${e.clientX - CURSOR_OFFSET_SIZE}px ${e.clientY - CURSOR_OFFSET_SIZE}px`
+            )
+         );
+   </script>
 </html>

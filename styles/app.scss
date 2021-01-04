@@ -30,17 +30,59 @@ img {
   overflow: hidden;
 }
 
+.footer {
+  grid-area: footer;
+
+  .content {
+    @extend %centered-flex;
+  }
+}
+
+.lang .current {
+  @extend %drop-shadow;
+}
+
+a {
+  display: block;
+  @extend %drop-shadow;
+  text-decoration: none;
+  transition-property: background-color, color;
+  transition-duration: 100ms;
+  transition-timing-function: linear;
+  background-color: #8DDBCD;
+  color: black;
+  
+  &:link {
+    background-color: #89E8A1;
+  }
+  &:visited {
+    background-color: #8FE9F2;
+  }
+  &:hover {
+    background-color: #8FF2C4;
+  }
+  &:active {
+    background-color: #89E8A1;
+  }
+  &:focus {
+    background-color: #8FF2C4;
+  }
+}
+
 @media screen and (min-width: VARS.$media-switch-at) {
   body {
-    grid-template: "pane1 separator pane2";
+    grid-template:
+      "pane1 separator pane2"
+      "footer footer footer";
+    grid-template-rows: 1fr min-content;
     grid-template-columns: 1fr 1px 1fr;
   }
 }
 
 @media screen and (max-width: VARS.$media-switch-at) {
   body {
-    grid-template: "pane1" "pane2";
-    grid-template-rows: min-content 1fr;
+    grid-template: "pane1" "pane2" "footer";
+    grid-template-rows: min-content 1fr min-content;
 
     > div {
       height: unset;
