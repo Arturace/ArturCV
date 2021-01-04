@@ -1,5 +1,9 @@
 {
   "lang": "fr",
+  "languages" : {
+    "fr": "Français",
+    "en": "Anglais"
+  },
   "myTitle": "Développeur full stack",
   "headline": "Spécialisé dans ce dont vous avez besoin"
 }

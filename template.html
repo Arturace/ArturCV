@@ -58,5 +58,20 @@
             {{/each}}
          </ul>
       </div>
+      <div class="footer">
+         <div class="separator -horizontal"></div>
+         <div class="content">
+            <ul class="lang">
+               {{@each(it.languages) => lang}}
+                  {{@if(lang.current)}}
+                     <li class="current"><span>{{lang.text}}</span></li>
+                  {{#else}}
+                     <li><a href="{{lang.href}}">{{lang.text}}</a></li>
+                  {{/if}}
+               {{/each}}
+            </ul>
+            <a id="sourceCode" href="https://github.com/Arturace/ArturCV/">Source code</a>
+         </div>
+      </div>
    </body>
 </html>

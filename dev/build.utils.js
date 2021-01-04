@@ -23,15 +23,28 @@ function build_html() {
     const SHARED_DATA = read_json_file(PATH.join(DATA_DIR_NAME, 'shared.json'));
     datasPerLang = FS
     .readdirSync(DATA_LANG_DIR_NAME)
-    .map(d => ({
-      data: mergeObjects(
-        JSON.parse(SHARED_DATA)
-        , parse_json_file(PATH.join(DATA_LANG_DIR_NAME, d)))
-      , fileName: d
-    }));
+    .map(d => {
+      let res = {
+        data: mergeObjects(
+          JSON.parse(SHARED_DATA)
+          , parse_json_file(PATH.join(DATA_LANG_DIR_NAME, d)))
+        , fileName: d
+      };
+      if (!res.data.lang) throw new Error(`No "lang" found in ${d}`);
+      if (!res.data.languages) throw new Error(`No "languages" found in ${d}`);
+      res.data.languages = Object.entries(res.data.languages).map(l => {
+        return {
+          href: `${l[0]}.html`
+          , text: l[1]
+          , current: l[0] == res.data.lang
+        };
+      });
+      return res;
+    });
     template = FS.readFileSync('template.html', 'utf8');
   } catch (e) {
     console.error('Failed to fetch data files.', e);
+    return;
   }
 
   if (!FS.existsSync(HTML_OUT_DIR))
