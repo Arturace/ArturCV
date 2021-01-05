@@ -30,8 +30,7 @@ SUB_PROC.stderr.on('data', (data) => console.error(`${data}`));
 
 // files to watch
 [
-  'template.html'
-  , 'dist/favicon.ico'
+  'dist/favicon.ico'
 ].forEach(v =>
   FS.watch(
     PATH.join(process.cwd(), v)
@@ -39,7 +38,8 @@ SUB_PROC.stderr.on('data', (data) => console.error(`${data}`));
 );
 // folders to watch
 [
-  'styles/'
+  'templates/'
+  , 'styles/'
   , 'dist/img/'
   , 'template-data/'
 ].forEach(v =>

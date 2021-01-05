@@ -3,7 +3,9 @@ const PATH = require('path');
 const FS = require('fs');
 const MINIFY = require('minify');
 
+const TEMPLATE_DIR = PATH.join(process.cwd(), 'templates/');
 const OUT_DIR = PATH.join(process.cwd(), 'dist/');
+const INDEX_HTML = `index.html`;
 
 function read_json_file(filePath) {
   return FS.readFileSync(filePath, { encoding: 'utf8' });
@@ -13,35 +15,45 @@ function parse_json_file(filePath) {
   return JSON.parse(read_json_file(filePath));
 }
 
+function sqrl_to_file(fileName, template, data) {
+  if (FS.existsSync(fileName))
+      FS.unlinkSync(fileName);
+    FS.writeFileSync(
+      fileName
+      , SQRL.render(template, data)
+    );
+}
 function build_html() {
   console.log('Building HTML');
   const HTML_OUT_DIR = PATH.join(OUT_DIR, 'html/');
   const DATA_DIR_NAME = PATH.join(process.cwd(), 'template-data');
   const DATA_LANG_DIR_NAME = PATH.join(DATA_DIR_NAME, 'per-lang');
-  let template, datasPerLang;
+  let mainPageTemplate, datasPerLang, indexTemplate;
   try {
     const SHARED_DATA = read_json_file(PATH.join(DATA_DIR_NAME, 'shared.json'));
     datasPerLang = FS
-    .readdirSync(DATA_LANG_DIR_NAME)
-    .map(d => {
-      let res = {
-        data: mergeObjects(
-          JSON.parse(SHARED_DATA)
-          , parse_json_file(PATH.join(DATA_LANG_DIR_NAME, d)))
-        , fileName: d
-      };
-      if (!res.data.lang) throw new Error(`No "lang" found in ${d}`);
-      if (!res.data.languages) throw new Error(`No "languages" found in ${d}`);
-      res.data.languages = Object.entries(res.data.languages).map(l => {
-        return {
-          href: `${l[0]}.html`
-          , text: l[1]
-          , current: l[0] == res.data.lang
+      .readdirSync(DATA_LANG_DIR_NAME)
+      .map(d => {
+        let res = {
+          data: mergeObjects(
+            JSON.parse(SHARED_DATA)
+            , parse_json_file(PATH.join(DATA_LANG_DIR_NAME, d)))
+          , fileName: d
         };
+        if (!res.data.lang) throw new Error(`No "lang" found in ${d}`);
+        if (!res.data.languages) throw new Error(`No "languages" found in ${d}`);
+        res.data.languages = Object.entries(res.data.languages).map(l => {
+          return {
+            href: `${l[0]}.html`
+            , text: l[1]
+            , shortText: l[0]
+            , current: l[0] == res.data.lang
+          };
+        });
+        return res;
       });
-      return res;
-    });
-    template = FS.readFileSync('template.html', 'utf8');
+    mainPageTemplate = FS.readFileSync(PATH.join(TEMPLATE_DIR, 'main-page.html'), 'utf8');
+    indexTemplate = FS.readFileSync(PATH.join(TEMPLATE_DIR, INDEX_HTML), 'utf8');
   } catch (e) {
     console.error('Failed to fetch data files.', e);
     return;
@@ -49,15 +61,22 @@ function build_html() {
 
   if (!FS.existsSync(HTML_OUT_DIR))
     FS.mkdirSync(HTML_OUT_DIR);
+
   datasPerLang.forEach(dpl => {
-    const FILE_NAME = `${PATH.join(HTML_OUT_DIR, dpl.fileName.slice(0, -4 /*json*/))}html`;
-    if (FS.existsSync(FILE_NAME))
-      FS.unlinkSync(FILE_NAME);
-    FS.writeFileSync(
-      FILE_NAME
-      , SQRL.render(template, dpl.data)
-    );
+    sqrl_to_file(
+      `${PATH.join(HTML_OUT_DIR, dpl.fileName.slice(0, -4 /*json*/))}html`
+      , mainPageTemplate, dpl.data);
   });
+  
+  // index decides what language to pick.
+  sqrl_to_file(
+    `${PATH.join(HTML_OUT_DIR, INDEX_HTML)}`
+    , indexTemplate
+    , {
+      languages: datasPerLang[0].data.languages.map(l => ({ href: l.href, shortText: l.shortText }))
+      , defaultLangHref: 'en.html'
+    }
+  );
 }
 
 async function build_scss() {

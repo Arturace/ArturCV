@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Loading</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script type="text/javascript">
+    const LANG = navigator.language.toLowerCase();
+    /** @type {string[]} */
+    const LANGS = {{* JSON.stringify(it.languages)}};
+    const GUT_LANG = LANGS.find(l => LANG.includes(l.shortText));
+    window.location.replace(GUT_LANG ? GUT_LANG.href : '{{it.defaultLangHref}}');
+  </script>
+</head>
+<body>
+</body>
+</html>
