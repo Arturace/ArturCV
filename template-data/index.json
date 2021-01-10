@@ -1,0 +1,5 @@
+{
+  "mainPage": "main-page",
+  "defaultLanguage": "en",
+  "languages" : [ "fr", "en" ]
+}

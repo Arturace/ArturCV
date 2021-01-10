@@ -9,8 +9,8 @@
     const LANG = navigator.language.toLowerCase();
     /** @type {string[]} */
     const LANGS = {{* JSON.stringify(it.languages)}};
-    const GUT_LANG = LANGS.find(l => LANG.includes(l.shortText));
-    window.location.replace(GUT_LANG ? GUT_LANG.href : '{{it.defaultLangHref}}');
+    const GUT_LANG = LANGS.find(l => LANG.includes(l));
+    window.location.replace(`{{it.mainPage}}.${GUT_LANG ? GUT_LANG : '{{it.defaultLanguage}}'}.html`);
   </script>
 </head>
 <body>
