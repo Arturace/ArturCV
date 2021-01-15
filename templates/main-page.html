@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{it.lang}}">
+<html lang="{{it.lang}}" class="dark">
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,8 +20,8 @@
       </style>
       <link rel="stylesheet" href="stylez.min.css">
    </head>
-   <body>
-      <div class="pane id">
+   <body class="bg-0">
+      <div class="pane id bg-1">
          <h2>{{it.myTitle}}</h2>
          <div class="separator -horizontal"></div>
          <div>
@@ -33,7 +33,8 @@
                      <a href="{{logo.href}}" title="{{logo.title}}">
                         <img
                            src="{{it.socials.logosPath}}{{logo.path}}" 
-                           alt="{{logo.title}}"/>
+                           alt="{{logo.title}}"
+                           loading="eager"/>
                      </a>
                   </li>
                {{/each}}
@@ -43,17 +44,33 @@
          <h3>{{it.headline}}</h3>
       </div>
       <div class="separator"></div>
-      <div class="pane technos">
+      <div class="pane technos bg-1">
          <ul>
             {{@each(it.technos.logos) => logo}}
-               <li title="{{logo.title}}">
-                  {{@if(logo.path)}}
-                     <img
-                     src="{{it.technos.logosPath}}{{logo.path}}" 
-                     alt="{{logo.title}}" />
-                  {{#else}}
-                     {{logo.title}}
-                  {{/if}}
+               <li class="bg-2" title="{{logo.title}}">
+                  <div>
+                     {{@if(logo.path)}}
+                        {{@if(typeof logo.path == 'string')}}
+                           <img
+                           src="{{it.technos.logosPath}}{{logo.path}}" 
+                           alt="{{logo.title}}"
+                           loading="eager" />
+                        {{#else}}
+                           <img
+                           class="light"
+                           src="{{it.technos.logosPath}}{{logo.path.light}}" 
+                           alt="{{logo.title}}"
+                           loading="lazy" />
+                           <img
+                           class="dark"
+                           src="{{it.technos.logosPath}}{{logo.path.dark}}" 
+                           alt="{{logo.title}}"
+                           loading="eager" />
+                         {{/if}}
+                     {{#else}}
+                        {{logo.title}}
+                     {{/if}}
+                  </div>
                </li>
             {{/each}}
          </ul>
@@ -77,7 +94,7 @@
    <script type="text/javascript">
       // https://stackoverflow.com/questions/21054126/how-to-detect-if-a-device-has-mouse-support
       if (matchMedia('(hover:hover)').matches) {
-         const TECHNOS = document.querySelectorAll('.technos ul li');
+         const TECHNOS = document.querySelectorAll('.technos ul li div');
          const CURSOR_OFFSET_SIZE = parseFloat(
                window
                   .getComputedStyle(TECHNOS[0])
