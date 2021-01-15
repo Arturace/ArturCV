@@ -22,6 +22,14 @@
   }
 }
 
+:root.light .technos ul li img.dark {
+  display: none;
+}
+
+:root.dark .technos ul li img.light {
+  display: none;
+}
+
 @media screen and (max-width: VARS.$media-switch-at) {
   .technos {
     justify-content: start;
