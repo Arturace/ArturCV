@@ -6,15 +6,17 @@
   "devDependencies": {
     "http-server": "^0.12.3",
     "minify": "^6.0.1",
+    "minimist": "^1.2.5",
     "sass": "^1.32.2",
     "squirrelly": "^8.0.8"
   },
   "scripts": {
     "build": "node dev/build.js",
-    "deploy:local": "node dev/deploy.js local-deploy",
+    "deploy:local": "node ./dev/deploy.js local-deploy --ignore \".*_og\\.\" ",
     "serve": "npm run build && npm run deploy:local && http-server local-deploy",
     "serve-w": "node dev/deploy-watch.js"
   },
   "author": "Artur Madjidov",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }
