@@ -13,6 +13,7 @@
   "scripts": {
     "build": "node dev/build.js",
     "deploy:local": "node ./dev/deploy.js local-deploy --ignore \".*_og\\.\" ",
+    "deploy:prod": "node ./dev/deploy.js local-deploy -i \".*_og\\.\" -i \"colors\\.html\" ",
     "serve": "npm run build && npm run deploy:local && http-server local-deploy",
     "serve-w": "node dev/deploy-watch.js"
   },

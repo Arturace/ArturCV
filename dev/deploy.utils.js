@@ -3,13 +3,18 @@ const fs = require('fs');
 
 const DIST_DIR = path.join(process.cwd(), 'dist/');
 const HTML_DIR = path.join(DIST_DIR, 'html/');
+
 /**
  * Root directories in the source folder, that have a specific copy behavior.
  */
 const SPECIFIC_BAHAVIOR_DIRS = {
-  'html': (deployLocation) => {
+  'html': (deployLocation, toIgnoreRegexes) => {
     fs.readdirSync(HTML_DIR)
-      .forEach(html => copy(path.join(HTML_DIR, html), path.join(deployLocation, html)));
+      .forEach(html => copy(
+        path.join(HTML_DIR, html)
+        , path.join(deployLocation, html)
+        , toIgnoreRegexes
+      ));
   }
 };
 
@@ -58,13 +63,15 @@ function copy(srcPath, destPath, toIgnoreRegexes) {
  * @param {*} deployLocation 
  * @param {*} toIgnoreRegexes 
  */
-module.exports = function (deployLocation, toIgnoreRegexes = []) { 
+module.exports = function (deployLocation, toIgnoreRegexes = []) {
   deleteFolderRecursive(deployLocation);
   fs.mkdirSync(deployLocation);
 
   fs.readdirSync(DIST_DIR)
     .forEach(f => {
-      if (SPECIFIC_BAHAVIOR_DIRS[f]) SPECIFIC_BAHAVIOR_DIRS[f](deployLocation);
-      else copy(path.join(DIST_DIR, f), path.join(deployLocation, f), toIgnoreRegexes)
+      if (SPECIFIC_BAHAVIOR_DIRS[f]) 
+        SPECIFIC_BAHAVIOR_DIRS[f](deployLocation, toIgnoreRegexes);
+      else 
+        copy(path.join(DIST_DIR, f), path.join(deployLocation, f), toIgnoreRegexes)
     });
 };
