@@ -1,18 +1,130 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset='utf-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <title>Loading</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    body.loading .page-loading-l,
+    body.loading .page-loading-r {
+      animation-duration: 3s;
+      animation-delay: 100ms;
+      animation-iteration-count: infinite;
+      animation-timing-function:  ease-in-out;
+    }
+    body.loading .page-loading-l {
+      animation-name: page-loading-l;
+      left: -50vw;
+    }
+
+    body.loading .page-loading-r {
+      animation-name: page-loading-r;
+      right: -50vw;
+    }
+
+    .page-loading-overlay {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      z-index: 100;
+    }
+
+    .page-loading-l {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      background-color: #89E8A1;
+      left: -100vw;
+    }
+
+    .page-loading-r {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      background-color: #8FF2C4;
+      right: -100vw;
+    }
+
+    .page-loading-l,
+    .page-loading-r {
+      transition-property: right, left, background-color;
+      transition-duration: 100ms;
+    }
+
+    @keyframes page-loading-r {
+      0% {
+        right: -50vw;
+      }
+      
+      20% {
+        right: -60vw;
+      }
+
+      40% {
+        right: -55vw;
+      }
+
+      60% {
+        right: -40vw;
+      }
+
+      80% {
+        right: -60vw;
+      }
+      
+      100% {
+        right: -50vw;
+      }
+    }
+
+    @keyframes page-loading-l {
+      0% {
+        left: -50vw;
+      }
+      
+      20% {
+        left: -40vw;
+      }
+
+      40% {
+        left: -45vw;
+      }
+
+      60% {
+        left: -60vw;
+      }
+
+      80% {
+        left: -40vw;
+      }
+
+      100% {
+        left: -50vw;
+      }
+    }
+  </style>
   <script type="text/javascript">
     const LANG = navigator.language.toLowerCase();
     /** @type {string[]} */
     const LANGS = {{* JSON.stringify(it.languages)}};
     const GUT_LANG = LANGS.find(l => LANG.includes(l));
-    window.location.replace(`{{it.mainPage}}.${GUT_LANG ? GUT_LANG : '{{it.defaultLanguage}}'}.html`);
+    // window.location.replace(`{{it.mainPage}}.${GUT_LANG ? GUT_LANG : '{{it.defaultLanguage}}'}.html`);
   </script>
 </head>
-<body>
+<body class="loading">
+  <div class="page-loading-overlay"></div>
+  <div class="page-loading-l"></div>
+  <div class="page-loading-r"></div>
 </body>
 </html>
