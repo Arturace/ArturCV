@@ -18,12 +18,12 @@
     "logosPath": "img/technos/",
     "logos": [
       { "title": "JavaScript", "path": "js.png"},
-      { "title": "ASP.NET MVC", "path": "ASP.NET MVC.png"},
-      { "title": "CSS", "path": "css.png"},
+      { "title": "ASP.NET MVC", "path": { "light" : "ASP.NET MVC-light.webp", "dark": "ASP.NET MVC-dark.webp" }},
+      { "title": "CSS", "path":  { "light" : "css-light.webp", "dark": "css-dark.webp" }},
       { "title": "SCSS", "path": "scss.png"},
-      { "title": "HTML", "path": "html.png"},
+      { "title": "HTML", "path": { "light" : "html-light.webp", "dark": "html-dark.webp" }},
       { "title": "NodeJS", "path": "nodejs.svg"},
-      { "title": "jQuery", "path": "jquery.png"},
+      { "title": "jQuery", "path": { "light" : "jquery-light.png", "dark": "jquery-dark.png" }},
       { "title": "Cypress", "path": "cypress.png"},
       { "title": "Bootstrap", "path": "bootstrap.png"},
       { "title": "C", "path": "c.webp"},
@@ -33,9 +33,9 @@
       { "title": "Angular", "path": "angular.png"},
       { "title": "Ghostscript", "path": "ghostscript.png"},
       { "title": "Webpack", "path": "webpack.png"},
-      { "title": "WPF", "path": "wpf.png"},
+      { "title": "WPF"},
       { "title": "Java", "path": "java.png"},
-      { "title": "Visual Basic", "path": "vb_net.png"}
+      { "title": "Visual Basic", "path": { "light" : "vb_net-light.webp", "dark": "vb_net-dark.webp" }}
     ]
   }
 }

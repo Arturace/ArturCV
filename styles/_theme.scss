@@ -1,0 +1,25 @@
+@use "sass:list";
+$bg-dark: #020202, #0F0F0F, #1A1A1A, #202020, #292929, #393939, #404040;
+$bg-light: #FDFDFD, #F9F9F9, #F3F3F3, #E7E7E7, #E0E0E0, #DADADA, #D4D4D4;
+
+:root.dark {
+  @for $i from 1 through length($bg-dark) {
+    --bg-#{$i - 1}: #{list.nth($bg-dark, $i)};
+  }
+  color: white;
+  --box-shadow-color: rgba(255, 255, 255, 0.25);
+}
+
+:root.light {
+  @for $i from 1 through length($bg-light) {
+    --bg-#{$i - 1}: #{list.nth($bg-light, $i)};
+  }
+  color: black;
+  --box-shadow-color: rgba(0, 0, 0, 0.25);
+}
+
+@for $i from 1 through length($bg-light) {
+  .bg-#{$i - 1} {
+    background-color: var(--bg-#{$i - 1});
+  }
+}
