@@ -15,7 +15,7 @@ const BUILD_N_DEPLOY = (() => {
           : 'Change detected, re-building & deploying.'
       );
       BUILD.build();
-      DEPLOY();
+      DEPLOY('local-deploy');
     }, 666);
   };
 })();
