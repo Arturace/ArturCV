@@ -25,7 +25,7 @@
       { "title": "NodeJS", "path": "nodejs.svg"},
       { "title": "jQuery", "path": { "light" : "jquery-light.png", "dark": "jquery-dark.png" }},
       { "title": "Cypress", "path": "cypress.png"},
-      { "title": "Bootstrap", "path": "bootstrap.png"},
+      { "title": "Bootstrap", "path": "bootstrap.webp"},
       { "title": "C", "path": "c.webp"},
       { "title": "C++", "path": "cpp.png"},
       { "title": "Vue", "path": "vuejs.png"},
