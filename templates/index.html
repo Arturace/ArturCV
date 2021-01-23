@@ -3,6 +3,7 @@
 
 <head>
   <meta charset='utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <title>Loading</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -15,23 +16,17 @@
       overflow: hidden;
     }
 
-    body.loading .page-loading-l,
-    body.loading .page-loading-r {
-      animation-duration: 3s;
-      animation-delay: 100ms;
-      animation-iteration-count: infinite;
-      animation-timing-function:  ease-in-out;
-    }
     body.loading .page-loading-l {
-      animation-name: page-loading-l;
-      left: -50vw;
+      left: -2vw;
     }
 
     body.loading .page-loading-r {
-      animation-name: page-loading-r;
-      right: -50vw;
+      right: -2vw;
     }
 
+    body.loading .page-loading-overlay {
+      display: block;
+    }
     .page-loading-overlay {
       display: none;
       width: 100vw;
@@ -40,79 +35,83 @@
       z-index: 100;
     }
 
-    .page-loading-l {
-      width: 100vw;
-      height: 100vh;
+    
+    .page-loading-l,
+    .page-loading-r,
+    .page-loading-t,
+    .page-loading-b {
       position: absolute;
-      background-color: #89E8A1;
-      left: -100vw;
+    }
+
+    .page-loading-l {
+      width: 50vw;
+      height: 100vh;
+      background-color: #8FF2C4;
+      left: -50vw;
     }
 
     .page-loading-r {
-      width: 100vw;
+      width: 50vw;
       height: 100vh;
-      position: absolute;
       background-color: #8FF2C4;
-      right: -100vw;
+      right: -50vw;
     }
 
     .page-loading-l,
-    .page-loading-r {
-      transition-property: right, left, background-color;
+    .page-loading-r,
+    .page-loading-t,
+    .page-loading-b  {
+      transition-property: right, left, top, bottom, background-color;
       transition-duration: 100ms;
     }
-
-    @keyframes page-loading-r {
-      0% {
-        right: -50vw;
-      }
-      
-      20% {
-        right: -60vw;
-      }
-
-      40% {
-        right: -55vw;
-      }
-
-      60% {
-        right: -40vw;
-      }
-
-      80% {
-        right: -60vw;
-      }
-      
-      100% {
-        right: -50vw;
-      }
+    .page-loading-t,
+    .page-loading-b {
+      height: 100vh;
+      width: 4vw;
+      left: calc(50vw - (4vw / 2));
     }
 
-    @keyframes page-loading-l {
+    .page-loading-t {
+      transition-timing-function: cubic-bezier(.25,.1,.25,1);
+      background-color: brown;
+      top: -100vh;
+    }
+    .page-loading-b {
+      background-color: chocolate;
+      top: 100vh;
+    }
+
+    body.loading .page-loading-b {
+      top: 0vh;
+    }
+
+    body.loading .page-loading-t:not(.end) {
+      transition-duration: 20s;
+      top: -1vh;
+      /* animation-duration: 20s;
+      animation-delay: 100ms;
+      animation-name: page-loading-t; */
+      /* animation-timing-function: ease-in-out; */
+    }
+    
+    body.loading .page-loading-t.end {
+      transition-duration: 200ms;
+      top: 0vh;
+    }
+    @keyframes page-loading-t {
       0% {
-        left: -50vw;
+        top: 100vh;
       }
-      
+
       20% {
-        left: -40vw;
-      }
-
-      40% {
-        left: -45vw;
-      }
-
-      60% {
-        left: -60vw;
-      }
-
-      80% {
-        left: -40vw;
+        top: 40vh;
       }
 
       100% {
-        left: -50vw;
+        top: 0vh;
       }
     }
+
   </style>
   <script type="text/javascript">
     const LANG = navigator.language.toLowerCase();
@@ -122,9 +121,15 @@
     // window.location.replace(`{{it.mainPage}}.${GUT_LANG ? GUT_LANG : '{{it.defaultLanguage}}'}.html`);
   </script>
 </head>
-<body class="loading">
+<body>
   <div class="page-loading-overlay"></div>
   <div class="page-loading-l"></div>
+  <div class="page-loading-b"></div>
   <div class="page-loading-r"></div>
+  <div class="page-loading-t"></div>
+  <script>
+    setTimeout(() => document.body.classList.add('loading'), 0);
+    setTimeout(() => document.querySelector('.page-loading-t').classList.add('end'), 2000);
+  </script>
 </body>
 </html>
