@@ -39,6 +39,7 @@ SUB_PROC.stderr.on('data', (data) => console.error(`${data}`));
 // folders to watch
 [
   'templates/'
+  , 'partials/'
   , 'styles/'
   , 'dist/img/'
   , 'template-data/'

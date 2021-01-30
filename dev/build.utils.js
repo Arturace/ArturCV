@@ -1,5 +1,6 @@
 const SQRL = require('squirrelly')
 const PATH = require('path');
+const SASS = require('sass');
 const FS = require('fs');
 const MINIFY = require('minify');
 
@@ -13,56 +14,55 @@ function parse_json_file(filePath) {
   return JSON.parse(read_json_file(filePath));
 }
 
+/**
+ * Converts some generic data entries.
+ * Entries from ... to ... :
+ * - scssToRender: scss file names to compiled css.
+ * @param {*} data 
+ */
+function process_generic_data(data) {
+  if (data.scssToRender) {
+    // For every scss file, we replace the filename by the compiled css.
+    if (!Array.isArray(data.scssToRender)) data.scssToRender = [ data.scssToRender ];
+    data.scssToRender = data.scssToRender.map(s => SASS.renderSync({ file: `styles/${s}` }).css);
+  }
+
+  return data;
+}
+
+/**
+ * Uses Squirrelly to compile a template into a file, using some data.
+ * @param {string} fileName 
+ * @param {string} template 
+ * @param {*} data 
+ */
 function sqrl_to_file(fileName, template, data) {
   if (FS.existsSync(fileName))
     FS.unlinkSync(fileName);
   FS.writeFileSync(
     fileName
-    , SQRL.render(template, data)
+    , SQRL.render(template, process_generic_data(data))
   );
 }
 
-function assure_directories_exist(basePath, directories) {
-  directories.forEach(f => {
-    basePath = PATH.join(basePath, f);
-    if (!FS.existsSync(basePath))
-      FS.mkdirSync(basePath);
-  });
-}
 function build_html() {
   console.log('Building HTML');
+  const PARTIALS_DIR_NAME = 'partials';
+  const PARTIALS_DIR = PATH.join(process.cwd(), PARTIALS_DIR_NAME);
+  const PARTIALS = get_files(PARTIALS_DIR, PARTIALS_DIR_NAME);
+  // Save partials into pre-defined templates, for later in-page use
+  PARTIALS.forEach(p =>
+    SQRL.templates.define(
+      PATH.join(p.directories, p.fullName)
+      , SQRL.compile(FS.readFileSync(p.path, 'utf8'))
+    )
+  );
   const TEMPLATE_DIR_NAME = 'templates';
   const TEMPLATE_DIR = PATH.join(process.cwd(), TEMPLATE_DIR_NAME);
   const SHARED_DATA_FILE_NAME = `shared.json`;
   const APP_WIDE_DATA_FILE_NAME = 'app-wide.json';
 
-  function get_templates(directoryPath, directoryName) {
-    function _internal(directoryPath, directoryName, add) {
-      const FILES = FS.readdirSync(directoryPath, { withFileTypes: true });
-      /** @type {{ name:string, path: string, directories: string, splitDirectories: string[] }} */
-      const RES = [];
-      FILES.forEach(dirent => {
-        if (dirent.isDirectory())
-          _internal(PATH.join(directoryPath, dirent.name), dirent.name, true)
-            .forEach(f => {
-              if (add) f.directories = PATH.join(directoryName, f.directories);
-              RES.push(f);
-            });
-        else
-          RES.push({
-            name: dirent.name.slice(0, -'.html'.length)
-            , fullName: dirent.name
-            , path: PATH.join(directoryPath, dirent.name)
-            , directories : add ? directoryName : ''
-            , splitDirectories : add ? [ directoryName ] : []
-          });
-      });
-      return RES;
-    }
-    return _internal(directoryPath, directoryName, false);
-  }
-  
-  const TEMPLATES = get_templates(TEMPLATE_DIR, TEMPLATE_DIR_NAME);
+  const TEMPLATES = get_files(TEMPLATE_DIR, TEMPLATE_DIR_NAME);
   if (TEMPLATES.length == 0) return;
   const HTML_OUT_DIR = PATH.join(OUT_DIR, 'html/');
   if (!FS.existsSync(HTML_OUT_DIR))
@@ -82,7 +82,7 @@ function build_html() {
         PATH.join(t_OUT_PATH, t.fullName)
         , t_TEMPLATE
         , FS.existsSync(t_JSON_PATH) 
-          ? mergeObjects(JSON.parse(APP_WIDE_SETTINGS), parse_json_file(t_JSON_PATH))
+          ? merge_objects(JSON.parse(APP_WIDE_SETTINGS), parse_json_file(t_JSON_PATH))
           : JSON.stringify(APP_WIDE_SETTINGS)
       );
     } else {
@@ -99,7 +99,7 @@ function build_html() {
         console.warn(`Hey, ${t_DATA_DIR} was empty or only contained a "shared.json", so the corresponding template was not processed.`);
       DATAS.forEach(d => {
         let res = {
-          data: mergeObjects(
+          data: merge_objects(
             JSON.parse(APP_WIDE_SETTINGS)
             , JSON.parse(t_SHARED_DATA)
             , parse_json_file(PATH.join(t_DATA_DIR, d))
@@ -131,7 +131,6 @@ async function build_scss() {
   console.log('Building SCSS');
   const OUT_CSS_FNAME = 'dist/stylez.css';
   const OUT_CSS_MIN_FNAME = 'dist/stylez.min.css';
-  const SASS = require('sass');
   FS.writeFileSync(
     PATH.join(OUT_CSS_FNAME)
     , SASS.renderSync({ file: 'styles/app.scss' }).css);
@@ -141,17 +140,68 @@ async function build_scss() {
   );
 }
 
+/**
+ * Gets file location info recursively.
+ * @param {string} directoryPath 
+ * @param {string} directoryName
+ * @returns {{ 
+ * name: string
+ * , fullName: string
+ * , path: string
+ * , directories: string
+ * , splitDirectories: string[]
+ * }}
+ */
+function get_files(directoryPath, directoryName) {
+  function _internal(directoryPath, directoryName, add) {
+    const FILES = FS.readdirSync(directoryPath, { withFileTypes: true });
+    /** @type {{ name:string, fullName: string, path: string, directories: string, splitDirectories: string[] }} */
+    const RES = [];
+    FILES.forEach(dirent => {
+      if (dirent.isDirectory())
+        _internal(PATH.join(directoryPath, dirent.name), dirent.name, true)
+          .forEach(f => {
+            if (add) f.directories = PATH.join(directoryName, f.directories);
+            RES.push(f);
+          });
+      else
+        RES.push({
+          name: dirent.name.substring(0, dirent.name.lastIndexOf('.'))
+          , fullName: dirent.name
+          , path: PATH.join(directoryPath, dirent.name)
+          , directories : add ? directoryName : ''
+          , splitDirectories : add ? [ directoryName ] : []
+        });
+    });
+    return RES;
+  }
+  return _internal(directoryPath, directoryName, false);
+}
+
+/**
+ * Makes sure the directories exist in the base path.
+ * @param {string} basePath 
+ * @param {string[]} directories 
+ */
+function assure_directories_exist(basePath, directories) {
+  directories.forEach(f => {
+    basePath = PATH.join(basePath, f);
+    if (!FS.existsSync(basePath))
+      FS.mkdirSync(basePath);
+  });
+}
+
 /*
 * Recursively merge properties of two objects.
 * @{source} https://stackoverflow.com/a/383245/7095512
 */
-function mergeObjects(obj1, ...objs) {
+function merge_objects(obj1, ...objs) {
   for (let obj of objs)
     for (let p in obj) {
       try {
         // Property in destination object set; update its value.
         if (obj[p].constructor == Object)
-          obj1[p] = mergeObjects(obj1[p], obj[p]);
+          obj1[p] = merge_objects(obj1[p], obj[p]);
         else
           obj1[p] = obj[p];
       } catch (e) {
