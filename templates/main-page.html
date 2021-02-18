@@ -19,8 +19,11 @@
          }
       </style>
       <link rel="stylesheet" href="stylez.min.css">
+      <script type="text/javascript">
+         {{@include('page-loading.js', ) /}}
+      </script>
    </head>
-   <body class="bg-0">
+   <body class="bg-0 loading">
       <div class="pane id bg-1">
          <h2>{{it.myTitle}}</h2>
          <div class="separator -horizontal"></div>
@@ -90,6 +93,7 @@
             <a id="sourceCode" href="https://github.com/Arturace/ArturCV/">Source code</a>
          </div>
       </div>
+      <page-loading hide></page-loading>
    </body>
    <script type="text/javascript">
       // https://stackoverflow.com/questions/21054126/how-to-detect-if-a-device-has-mouse-support

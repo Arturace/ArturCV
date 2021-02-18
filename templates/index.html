@@ -7,7 +7,7 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <title>Loading</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <style>
+  <!-- <style>
     body {
       margin: 0;
       padding: 0;
@@ -16,13 +16,13 @@
       overflow: hidden;
     }
 
-    body.loading .page-loading-l {
+    /* body.loading .page-loading-l {
       left: -2vw;
     }
 
     body.loading .page-loading-r {
       right: -2vw;
-    }
+    } */
 
     body.loading .page-loading-overlay {
       display: block;
@@ -34,8 +34,7 @@
       position: absolute;
       z-index: 100;
     }
-
-    
+/*
     .page-loading-l,
     .page-loading-r,
     .page-loading-t,
@@ -90,8 +89,8 @@
       top: -1vh;
       /* animation-duration: 20s;
       animation-delay: 100ms;
-      animation-name: page-loading-t; */
-      /* animation-timing-function: ease-in-out; */
+      animation-name: page-loading-t; * /
+      /* animation-timing-function: ease-in-out; * /
     }
     
     body.loading .page-loading-t.end {
@@ -110,26 +109,79 @@
       100% {
         top: 0vh;
       }
+    } */
+
+    .page-loading-slide {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      left: -100vw;
+      background-color: #8FF2C4;
+      transition-property: left;
+      transition-duration: 350ms;
+      transition-delay: 100ms;
+      transition-timing-function: cubic-bezier(.25,.1,.25,1);
+      color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
+    .page-loading-slide span {
+      /* transition-property: background-position;
+      transition-duration: 350ms;
+      transition-timing-function: cubic-bezier(.25,.1,.25,1); */
+
+      /* background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent; */
+
+      color: rgba(9,9,117,1);
+      /* background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(2,0,36,0) calc(50% - 1px), rgba(9,9,117,1) 50%, rgba(9,9,121,1) 100%);
+      background-size: 200% 200%; */
+      /* -webkit-animation: AnimationName 2s ease infinite;
+      -moz-animation: AnimationName 2s ease infinite;
+      animation: AnimationName 2s ease infinite; */
+    }
+
+    /* body.loading .page-loading-slide {
+      left: 0;
+    }
+
+    @-webkit-keyframes AnimationName {
+      0%{background-position-x: 200%}
+      100%{background-position-x: 0%}
+    }
+    @-moz-keyframes AnimationName {
+      0%{background-position-x: 200%}
+      100%{background-position-x: 0%}
+    }
+    @keyframes AnimationName {
+      0%{background-position-x: 200%}
+      100%{background-position-x: 0%}
+    } */
+  </style> -->
+  <style>
+     {{@each(it.scssToRender) => css}}
+      {{css}}
+    {{/each}}
   </style>
   <script type="text/javascript">
     const LANG = navigator.language.toLowerCase();
     /** @type {string[]} */
     const LANGS = {{* JSON.stringify(it.languages)}};
     const GUT_LANG = LANGS.find(l => LANG.includes(l));
-    // window.location.replace(`{{it.mainPage}}.${GUT_LANG ? GUT_LANG : '{{it.defaultLanguage}}'}.html`);
+    const TD = parseInt(getComputedStyle(document.documentElement)
+      .getPropertyValue('--loading-transition-duration'));
+
+    {{@include('page-loading.js', ) /}}
+
+    setTimeout(() => 
+      window.location.replace(`{{it.mainPage}}.${GUT_LANG ? GUT_LANG : '{{it.defaultLanguage}}'}.html`)
+      , TD);
   </script>
 </head>
 <body>
-  <div class="page-loading-overlay"></div>
-  <div class="page-loading-l"></div>
-  <div class="page-loading-b"></div>
-  <div class="page-loading-r"></div>
-  <div class="page-loading-t"></div>
-  <script>
-    setTimeout(() => document.body.classList.add('loading'), 0);
-    setTimeout(() => document.querySelector('.page-loading-t').classList.add('end'), 2000);
-  </script>
+  <page-loading is-shown></page-loading>
 </body>
 </html>

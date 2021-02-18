@@ -1,4 +1,5 @@
 {
+  "scssToRender": [ "_body.scss", "loading.scss" ],
   "mainPage": "main-page",
   "defaultLanguage": "en",
   "languages" : [ "fr", "en" ]

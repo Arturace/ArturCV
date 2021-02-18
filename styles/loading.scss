@@ -1,0 +1,41 @@
+:root {
+  --loading-transition-duration: 350ms;
+}
+
+page-loading {
+  .overlay {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+  }
+
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: -100vw;
+    background-color: #8FF2C4;
+    transition-property: left;
+    transition-duration: var(--loading-transition-duration);
+    transition-timing-function: cubic-bezier(.25,.1,.25,1);
+    // transition-delay: 100ms;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.shown {
+    .overlay {
+      display: block;
+    }
+
+    .slide {
+      left: 0;
+    }
+  }
+}

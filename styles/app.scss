@@ -1,6 +1,8 @@
 @use "_vars.scss" as VARS;
 @use "_shared.scss" as SHARED;
 @use "_theme.scss";
+@use "_body.scss";
+@use "loading.scss";
 @use "separator.scss";
 @use "pane.scss";
 @use "id.scss";
@@ -8,14 +10,7 @@
 @use "technos.scss";
 
 body {
-  display: grid;
-  margin: 0px;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-
   > div {
-    height: 100%;
     overflow: hidden;
   }
 }
