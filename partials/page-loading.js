@@ -14,9 +14,9 @@ window.customElements.define('page-loading', class PageLoading extends HTMLEleme
     if (this.hasAttribute('is-shown'))
       this.show();
     if (this.hasAttribute('is-shown-immediatly'))
-      this.classList.add('shown');
+      this._show();
     if (this.hasAttribute('hide')) {
-      this.classList.add('shown');
+      this._show();
       this.hide();
     }
   }
@@ -24,23 +24,31 @@ window.customElements.define('page-loading', class PageLoading extends HTMLEleme
   show() {
     return new Promise(res => {
       setTimeout(() => {
-        this.classList.add('shown');
+        this._show();
         setTimeout(res, this.transitionDuration);
       }
       , 0);
     });
   }
 
+  _show() {
+    this.classList.add('shown');
+  }
+
   hide() {
     return new Promise(res => {
       setTimeout(() => {
-        this.classList.remove('shown');
+        this._hide();
         setTimeout(res, this.transitionDuration);
       }
       , 0);
     });
   }
   
+  _hide() {
+    this.classList.remove('shown');
+  }
+
   get transitionDuration() {
     return parseInt(
       getComputedStyle(document.documentElement)
