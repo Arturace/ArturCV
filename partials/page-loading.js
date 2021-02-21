@@ -22,10 +22,29 @@ window.customElements.define('page-loading', class PageLoading extends HTMLEleme
   }
 
   show() {
-    setTimeout(() => this.classList.add('shown'), 0);
+    return new Promise(res => {
+      setTimeout(() => {
+        this.classList.add('shown');
+        setTimeout(res, this.transitionDuration);
+      }
+      , 0);
+    });
   }
 
   hide() {
-    setTimeout(() => this.classList.remove('shown'), 0);
+    return new Promise(res => {
+      setTimeout(() => {
+        this.classList.remove('shown');
+        setTimeout(res, this.transitionDuration);
+      }
+      , 0);
+    });
+  }
+  
+  get transitionDuration() {
+    return parseInt(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--loading-transition-duration')
+    );
   }
 });
