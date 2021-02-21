@@ -116,13 +116,12 @@
             );
       }
       const PAGE_LOADING = document.getElementsByTagName('page-loading')[0];
-      const HOST = new RegExp(location.host.replace('.', '\\.'));
       let leavePageLoadingShown = false;
       document.body.addEventListener('click', (e) => {
          if (leavePageLoadingShown) return;
          const T = e.target;
          if (T.nodeName == 'A' 
-            && HOST.test(T.href)) {
+            && location.hostname == T.hostname) {
             e.preventDefault();
             PAGE_LOADING
                .show()
