@@ -60,7 +60,7 @@ function build_html() {
   const TEMPLATE_DIR_NAME = 'templates';
   const TEMPLATE_DIR = PATH.join(process.cwd(), TEMPLATE_DIR_NAME);
   const SHARED_DATA_FILE_NAME = `shared.json`;
-  const APP_WIDE_DATA_FILE_NAME = 'app-wide.json';
+  const APP_WIDE_FOLDER_FILE_NAME = 'app-wide';
 
   const TEMPLATES = get_files(TEMPLATE_DIR, TEMPLATE_DIR_NAME);
   if (TEMPLATES.length == 0) return;
@@ -68,7 +68,15 @@ function build_html() {
   if (!FS.existsSync(HTML_OUT_DIR))
     FS.mkdirSync(HTML_OUT_DIR);
   const DATA_DIR_NAME = PATH.join(process.cwd(), 'template-data');
-  const APP_WIDE_SETTINGS = read_json_file(PATH.join(DATA_DIR_NAME, APP_WIDE_DATA_FILE_NAME));
+  const APP_WIDE_FOLDER_PATH = PATH.join(DATA_DIR_NAME, APP_WIDE_FOLDER_FILE_NAME);
+  const APP_WIDE_SETTINGS = read_json_file(PATH.join(APP_WIDE_FOLDER_PATH, SHARED_DATA_FILE_NAME));;
+  const APP_WIDE_SETTINGS_PER_LANG = 
+    get_files(APP_WIDE_FOLDER_PATH, APP_WIDE_FOLDER_FILE_NAME)
+    .filter(t => t.fullName != SHARED_DATA_FILE_NAME)
+    .reduce((m, t) => {
+      m[t.name] = JSON.stringify(merge_objects(JSON.parse(APP_WIDE_SETTINGS), parse_json_file(t.path)));
+      return m;
+    }, {});
 
   TEMPLATES.forEach(t => {
     const t_OUT_PATH = PATH.join(HTML_OUT_DIR, t.directories);
@@ -108,6 +116,7 @@ function build_html() {
         };
         res.data.lang = d.slice(0, -'.json'.length);
         if (!res.data.languages) throw new Error(`No "languages" found in ${d}`);
+        res.data = merge_objects(res.data, JSON.parse(APP_WIDE_SETTINGS_PER_LANG[res.data.lang]));
         res.data.languages = Object.entries(res.data.languages).map(l => {
           return {
             href: `${t.name}.${l[0]}.html`
