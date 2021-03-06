@@ -1,5 +1,5 @@
 (() => {
-  const PAGE_LOADING = document.getElementsByTagName('page-loading')[0];
+  const PAGE_LOADING = document.querySelector('body > app-loading');
   let leavePageLoadingShown = false;
   document.body.addEventListener('click', (e) => {
     if (leavePageLoadingShown) return;

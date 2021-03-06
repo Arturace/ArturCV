@@ -1,4 +1,4 @@
-window.customElements.define('page-loading', class PageLoading extends HTMLElement{
+window.customElements.define('app-loading', class PageLoading extends HTMLElement{
   constructor() {
     super();
     this.overlay = document.createElement('div');
@@ -10,6 +10,13 @@ window.customElements.define('page-loading', class PageLoading extends HTMLEleme
   connectedCallback() {
     this.appendChild(this.overlay);
     this.appendChild(this.slide);
+
+    if (this.hasAttribute('random-side')) {
+      const SIDES = ['top', 'bottom', 'left', 'right'];
+      this.classList.add(
+        SIDES[~~(Math.random()*SIDES.length)]
+      );
+    }
 
     if (this.hasAttribute('is-shown'))
       this.show();
@@ -51,7 +58,7 @@ window.customElements.define('page-loading', class PageLoading extends HTMLEleme
 
   get transitionDuration() {
     return parseInt(
-      getComputedStyle(document.documentElement)
+      getComputedStyle(this)
         .getPropertyValue('--loading-transition-duration')
     );
   }

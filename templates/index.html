@@ -20,7 +20,7 @@
     const TD = parseInt(getComputedStyle(document.documentElement)
       .getPropertyValue('--loading-transition-duration'));
 
-    {{@include('page-loading.js', ) /}}
+    {{@include('app-loading.js', ) /}}
 
     setTimeout(() => 
       window.location.replace(`{{it.mainPage}}.${GUT_LANG ? GUT_LANG : '{{it.defaultLanguage}}'}.html`)
@@ -28,6 +28,6 @@
   </script>
 </head>
 <body>
-  <page-loading is-shown></page-loading>
+  <app-loading is-shown class="right"></app-loading>
 </body>
 </html>

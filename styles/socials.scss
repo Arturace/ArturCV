@@ -1,10 +1,11 @@
 .socials li {
-  width: 60px;
-  height: 60px;
   margin: unset;
   padding: 4px;
-
+  
   a {
+    display: block;
+    width: 35px;
+    height: 35px;
     line-height: 0;
   }
 }
