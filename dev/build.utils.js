@@ -118,12 +118,14 @@ function build_html() {
         if (!res.data.languages) throw new Error(`No "languages" found in ${d}`);
         res.data = merge_objects(res.data, JSON.parse(APP_WIDE_SETTINGS_PER_LANG[res.data.lang]));
         res.data.languages = Object.entries(res.data.languages).map(l => {
-          return {
+          const O = {
             href: `${t.name}.${l[0]}.html`
             , text: l[1]
             , shortText: l[0]
             , current: l[0] == res.data.lang
           };
+          if (O.current) res.data.currentLanguage = O;
+          return O;
         });
         assure_directories_exist(HTML_OUT_DIR, t.splitDirectories);
         sqrl_to_file(

@@ -1,19 +1,10 @@
 @use "_vars.scss" as VARS;
 @use "_shared.scss" as SHARED;
+@use "_root.scss";
 @use "_theme.scss";
-@use "_body.scss";
+@use "_layout.scss";
 @use "loading.scss";
 @use "separator.scss";
-@use "pane.scss";
-@use "id.scss";
-@use "socials.scss";
-@use "technos.scss";
-
-body {
-  > div {
-    overflow: hidden;
-  }
-}
 
 .flex-center,
 li,
@@ -38,19 +29,7 @@ img {
   }
 }
 
-.footer {
-  grid-area: footer;
-
-  .content {
-    @extend %centered-flex;
-  }
-}
-
-.lang .current {
-  @extend %drop-shadow;
-}
-
-a {
+a, button {
   display: block;
   @extend %drop-shadow;
   text-decoration: none;
@@ -77,27 +56,7 @@ a {
   }
 }
 
-@media screen and (min-width: VARS.$media-switch-at) {
-  body {
-    grid-template:
-      "pane1 separator pane2"
-      "footer footer footer";
-    grid-template-rows: 1fr min-content;
-    grid-template-columns: 1fr 1px 1fr;
-  }
-}
-
-@media screen and (max-width: VARS.$media-switch-at) {
-  body {
-    grid-template: "pane1" "pane2" "footer";
-    grid-template-rows: min-content 1fr min-content;
-
-    > div {
-      height: unset;
-    }
-
-    > .separator {
-      display: none;
-    }
-  }
+button {
+  border: none;
+  border-radius: 0;
 }

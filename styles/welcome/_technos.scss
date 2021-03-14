@@ -1,5 +1,5 @@
-@use "_vars.scss" as VARS;
-@use "_shared.scss" as SHARED;
+@use "../_vars.scss" as VARS;
+@use "../_shared.scss" as SHARED;
 
 .technos,
 .technos ul {
@@ -27,14 +27,6 @@
     background-size: 90px 90px;
     background-position: -100vw -100vh;
   }
-}
-
-:root.light .technos ul li img.dark {
-  display: none;
-}
-
-:root.dark .technos ul li img.light {
-  display: none;
 }
 
 @media screen and (max-width: VARS.$media-switch-at) {

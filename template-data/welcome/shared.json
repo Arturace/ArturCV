@@ -1,4 +1,5 @@
 {
+  "scssToRender": [ "welcome/main.scss" ],
   "socials": {
     "logosPath": "img/socials/",
     "logos": [

@@ -1,4 +1,4 @@
-@use "_shared.scss" as SHARED;
+@use "../_shared.scss" as SHARED;
 
 .pane {
   @extend %centered-flex;

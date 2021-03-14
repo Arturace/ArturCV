@@ -8,7 +8,7 @@
     "minify": "^6.0.1",
     "minimist": "^1.2.5",
     "sass": "^1.32.2",
-    "squirrelly": "^8.0.8"
+    "squirrelly": "8.0.8"
   },
   "scripts": {
     "build": "node dev/build.js",

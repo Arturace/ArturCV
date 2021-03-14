@@ -1,6 +1,6 @@
 {
-  "scssToRender": [ "_body.scss", "loading.scss" ],
-  "mainPage": "main-page",
+  "scssToRender": [ "loading.scss" ],
+  "welcomePage": "welcome",
   "defaultLanguage": "en",
   "languages" : [ "fr", "en" ]
 }

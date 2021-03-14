@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="{{it.lang}}" class="dark">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Artur Madjidov's curriculum vitae"/>
+      <title>Artur Madjidov | {{it.myTitle}}</title>
+      <link rel="stylesheet" href="stylez.min.css">
+      <style>{{@each(it.scssToRender) => css}}{{*css}}{{/each}}</style>
+      <script type="text/javascript">
+         {{@include('img-loaded.js') /}}
+         {{@include('theme-img.js') /}}
+         {{@include('app-loading.js') /}}
+         {{@include('el-loader.js') /}}
+      </script>
+   </head>
+   <body class="bg-0">
+      <div class="main-container">
+         <div class="pane id bg-1">
+            <h2>{{it.myTitle}}</h2>
+            <div class="separator -horizontal"></div>
+            <div>
+            <h1>Artur Madjidov</h1>
+               <div class="separator -vertical"></div>
+               <ul class="socials">
+                  {{@each(it.socials.logos) => logo}}
+                     <li>
+                        <a href="{{logo.href}}" title="{{logo.title}}">
+                           <el-loader>
+                              <app-loading is-shown-immediatly random-side></app-loading>
+                              <img
+                                 src="{{it.socials.logosPath}}{{logo.path}}" 
+                                 alt="{{logo.title}}"
+                                 loading="eager"/>
+                           </el-loader>
+                        </a>
+                     </li>
+                  {{/each}}
+               </ul>
+            </div>
+            <div class="separator -horizontal"></div>
+            <h3>{{it.headline}}</h3>
+         </div>
+         <div class="separator"></div>
+         <div class="pane technos bg-1">
+            <ul>
+               {{@each(it.technos.logos) => logo}}
+                  <li class="bg-2" title="{{logo.title}}">
+                     <div {{logo.path ? '' : 'class=flex-center'}}>
+                        {{@if(logo.path)}}
+                           <el-loader>
+                              <app-loading is-shown-immediatly random-side></app-loading>
+                              {{@if(typeof logo.path == 'string')}}
+                                 <img
+                                 src="{{it.technos.logosPath}}{{logo.path}}" 
+                                 alt="{{logo.title}}"
+                                 loading="eager" />
+                              {{#else}}
+                                 <img is="theme-img"
+                                    light-src="{{it.technos.logosPath}}{{logo.path.light}}" 
+                                    dark-src="{{it.technos.logosPath}}{{logo.path.dark}}"
+                                    alt="{{logo.title}}"
+                                    loading="eager"></img>
+                               {{/if}}
+                           </el-loader>
+                        {{#else}}
+                           {{logo.title}}
+                        {{/if}}
+                     </div>
+                  </li>
+               {{/each}}
+            </ul>
+         </div>
+      </div>
+      <nav>
+         <div class="content">
+            <ul>
+               <li>
+                  <button type="button">{{ it.currentLanguage.text }}</button>
+               </li>
+               <li>
+                  <a id="sourceCode" href="https://github.com/Arturace/ArturCV/">{{ it.sourceCode }}</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <app-loading hide class="left"></app-loading>
+   </body>
+   <script type="text/javascript">
+      {{@include('show-loading-on-in-app-redirection.js') /}}
+   </script>
+</html>

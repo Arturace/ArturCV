@@ -1,0 +1,27 @@
+body > .main-container {
+  overflow: auto;
+}
+
+$nav-size: 50px;
+
+body {
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  > .main-container {
+    position: fixed;
+    top: 0;
+    height: calc(100% - #{$nav-size});
+    width: 100%;
+    overflow: auto;
+  }
+
+  > nav {
+    position: fixed;
+    bottom: 0;
+    height: $nav-size;
+    width: calc(100% - 6px); /*100%;*/
+  }
+}

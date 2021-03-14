@@ -1,0 +1,35 @@
+@use "../_vars.scss" as VARS;
+@use "_pane.scss";
+@use "_id.scss";
+@use "_socials.scss";
+@use "_technos.scss";
+
+body {
+  .main-container {
+    display: grid;
+  }
+  
+  @media screen and (min-width: VARS.$media-switch-at) {
+    .main-container {
+      grid-template:
+        "pane1 separator pane2";
+      grid-template-rows: 1fr;
+      grid-template-columns: 1fr 1px 1fr;
+    }
+  }
+  
+  @media screen and (max-width: VARS.$media-switch-at) {
+    .main-container {
+      grid-template: "pane1" "pane2";
+      grid-template-rows: min-content 1fr;
+  
+      > div {
+        height: unset;
+      }
+  
+      > .separator {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html class="dark">
-<head>
-  <meta charset='utf-8'>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Loading</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <style>
-     {{@each(it.scssToRender) => css}}
-      {{css}}
-    {{/each}}
-  </style>
-  <script type="text/javascript">
-    const LANG = navigator.language.toLowerCase();
-    /** @type {string[]} */
-    const LANGS = {{* JSON.stringify(it.languages)}};
-    const GUT_LANG = LANGS.find(l => LANG.includes(l));
-    const TD = parseInt(getComputedStyle(document.documentElement)
-      .getPropertyValue('--loading-transition-duration'));
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Loading</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      {{@each(it.scssToRender) => css}}{{*css}}{{/each}}
+    </style>
+    <script type="text/javascript">
+      const LANG = navigator.language.toLowerCase();
+      /** @type {string[]} */
+      const LANGS = {{* JSON.stringify(it.languages)}};
+      const GUT_LANG = LANGS.find(l => LANG.includes(l));
+      const TD = parseInt(getComputedStyle(document.documentElement)
+        .getPropertyValue('--loading-transition-duration'));
 
-    {{@include('app-loading.js', ) /}}
+      {{@include('app-loading.js', ) /}}
 
-    setTimeout(() => 
-      window.location.replace(`{{it.mainPage}}.${GUT_LANG ? GUT_LANG : '{{it.defaultLanguage}}'}.html`)
-      , TD);
-  </script>
-</head>
-<body class="bg-1">
-  <app-loading is-shown class="right"></app-loading>
-</body>
+      setTimeout(() =>
+        window.location.replace(`/{{it.welcomePage}}.${GUT_LANG ? GUT_LANG : '{{it.defaultLanguage}}'}.html`)
+        , TD);
+    </script>
+  </head>
+  <body class="bg-1">
+    <app-loading is-shown class="right"></app-loading>
+  </body>
 </html>
